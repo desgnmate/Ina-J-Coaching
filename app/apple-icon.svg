@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect width="180" height="180" rx="36" fill="#FAF5EC"/>
+  <rect x="8" y="8" width="164" height="164" rx="30" fill="none" stroke="#CA5F3C" stroke-width="2" opacity="0.5"/>
+  <text x="50%" y="58%" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="84" font-style="italic" fill="#2B1F17">ij</text>
+  <text x="50%" y="78%" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="9" letter-spacing="3" fill="#CA5F3C">COACHING</text>
+</svg>

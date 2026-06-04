@@ -1,26 +1,559 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Brand colors */
+  --color-cream: #faf5ec;
+  --color-cream-deep: #f1e8d8;
+  --color-cream-warm: #ede0c8;
+  --color-peach: #f5d9c4;
+  --color-peach-soft: #fce8d8;
+  --color-taupe: #c9b79c;
+  --color-taupe-light: #ddcfb6;
+  --color-terracotta: #ca5f3c;
+  --color-terracotta-soft: #e8b59a;
+  --color-terracotta-deep: #a8472a;
+  --color-gold: #c9a76a;
+  --color-gold-soft: #e2c896;
+  --color-ink: #2b1f17;
+  --color-ink-soft: #5a463a;
+  --color-ink-muted: #7a6759;
+  --color-line: #e3d6bf;
+
+  /* Fonts */
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+  --font-script: var(--font-caveat);
+
+  /* Type scale */
+  --tracking-display: -0.02em;
+  --tracking-body: -0.005em;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: auto; /* Lenis handles this */
+    -webkit-text-size-adjust: 100%;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family:
+      var(--font-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display), Georgia, serif;
+    color: var(--color-ink);
+    letter-spacing: var(--tracking-display);
+    font-weight: 400;
+  }
+
+  ::selection {
+    background: var(--color-terracotta-soft);
+    color: var(--color-ink);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-terracotta);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container-editorial {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-editorial {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-editorial {
+      padding-inline: 3.5rem;
+    }
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-terracotta);
+  }
+
+  .display-1 {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+  }
+
+  .display-2 {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+
+  .display-3 {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
+
+  .lead {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+  }
+
+  .body-lg {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+  }
+
+  .body {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+  }
+
+  .script-accent {
+    font-family: var(--font-script), "Brush Script MT", cursive;
+    color: var(--color-terracotta);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.95rem 1.75rem;
+    background: var(--color-terracotta);
+    color: var(--color-cream);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    border-radius: 999px;
+    border: 1px solid var(--color-terracotta);
+    transition:
+      background 220ms ease,
+      color 220ms ease,
+      transform 220ms ease,
+      box-shadow 220ms ease;
+    box-shadow: 0 1px 0 rgba(43, 31, 23, 0.04);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .btn-primary:hover {
+    background: var(--color-terracotta-deep);
+    border-color: var(--color-terracotta-deep);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px -8px rgba(202, 95, 60, 0.45);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.95rem 1.75rem;
+    background: transparent;
+    color: var(--color-ink);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    border-radius: 999px;
+    border: 1px solid var(--color-ink);
+    transition:
+      background 220ms ease,
+      color 220ms ease,
+      transform 220ms ease;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-ink);
+    color: var(--color-cream);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-ink);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-terracotta);
+    padding-bottom: 2px;
+    transition:
+      color 200ms ease,
+      gap 200ms ease;
+  }
+
+  .btn-ghost:hover {
+    color: var(--color-terracotta);
+    gap: 0.7rem;
+  }
+
+  .divider-soft {
+    width: 60px;
+    height: 1px;
+    background: var(--color-gold);
+  }
+
+  .section {
+    padding-block: clamp(4.5rem, 9vw, 8rem);
+  }
+
+  .section-tight {
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+
+  .panel-cream {
+    background: var(--color-cream-deep);
+  }
+
+  .panel-peach {
+    background: var(--color-peach-soft);
+  }
+
+  .panel-taupe {
+    background: var(--color-taupe-light);
+  }
+
+  .panel-ink {
+    background: var(--color-ink);
+    color: var(--color-cream);
+  }
+
+  .ink-link {
+    color: var(--color-terracotta);
+    border-bottom: 1px solid currentColor;
+    transition: color 200ms ease;
+  }
+
+  .ink-link:hover {
+    color: var(--color-terracotta-deep);
+  }
+
+  /* ─────── Background patterns (subtle, brand-tinted) ─────── */
+
+  .bg-grain {
+    position: relative;
+    isolation: isolate;
+  }
+  .bg-grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .bg-noise-cream {
+    position: relative;
+    isolation: isolate;
+  }
+  .bg-noise-cream::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .bg-dots {
+    position: relative;
+    isolation: isolate;
+  }
+  .bg-dots::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.06;
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      var(--color-terracotta) 1px,
+      transparent 0
+    );
+    background-size: 22px 22px;
+  }
+
+  .bg-lines {
+    position: relative;
+    isolation: isolate;
+  }
+  .bg-lines::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.05;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 24px,
+      var(--color-gold) 24px,
+      var(--color-gold) 25px
+    );
+  }
+
+  .bg-paw {
+    position: relative;
+    isolation: isolate;
+  }
+  .bg-paw::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='-14 -14 76.839 76.839'%3E%3Cpath fill='%23CA5F3C' d='M39.041,36.843c2.054,3.234,3.022,4.951,3.022,6.742c0,3.537-2.627,5.252-6.166,5.252 c-1.56,0-2.567-0.002-5.112-1.326c0,0-1.649-1.509-5.508-1.354c-3.895-0.154-5.545,1.373-5.545,1.373 c-2.545,1.323-3.516,1.309-5.074,1.309c-3.539,0-6.168-1.713-6.168-5.252c0-1.791,0.971-3.506,3.024-6.742 c0,0,3.881-6.445,7.244-9.477c2.43-2.188,5.973-2.18,5.973-2.18h1.093v-0.001c0,0,3.698-0.009,5.976,2.181 C35.059,30.51,39.041,36.844,39.041,36.843z M16.631,20.878c3.7,0,6.699-4.674,6.699-10.439S20.331,0,16.631,0 S9.932,4.674,9.932,10.439S12.931,20.878,16.631,20.878z M10.211,30.988c2.727-1.259,3.349-5.723,1.388-9.971 s-5.761-6.672-8.488-5.414s-3.348,5.723-1.388,9.971C3.684,29.822,7.484,32.245,10.211,30.988z M32.206,20.878 c3.7,0,6.7-4.674,6.7-10.439S35.906,0,32.206,0s-6.699,4.674-6.699,10.439C25.507,16.204,28.506,20.878,32.206,20.878z M45.727,15.602c-2.728-1.259-6.527,1.165-8.488,5.414s-1.339,8.713,1.389,9.972c2.728,1.258,6.527-1.166,8.488-5.414 S48.455,16.861,45.727,15.602z'/%3E%3C/svg%3E");
+    background-size: 72px 72px;
+  }
+  .bg-paw-intro {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='-14 -14 76.839 76.839'%3E%3Cpath fill='%23CA5F3C' d='M39.041,36.843c2.054,3.234,3.022,4.951,3.022,6.742c0,3.537-2.627,5.252-6.166,5.252 c-1.56,0-2.567-0.002-5.112-1.326c0,0-1.649-1.509-5.508-1.354c-3.895-0.154-5.545,1.373-5.545,1.373 c-2.545,1.323-3.516,1.309-5.074,1.309c-3.539,0-6.168-1.713-6.168-5.252c0-1.791,0.971-3.506,3.024-6.742 c0,0,3.881-6.445,7.244-9.477c2.43-2.188,5.973-2.18,5.973-2.18h1.093v-0.001c0,0,3.698-0.009,5.976,2.181 C35.059,30.51,39.041,36.844,39.041,36.843z M16.631,20.878c3.7,0,6.699-4.674,6.699-10.439S20.331,0,16.631,0 S9.932,4.674,9.932,10.439S12.931,20.878,16.631,20.878z M10.211,30.988c2.727-1.259,3.349-5.723,1.388-9.971 s-5.761-6.672-8.488-5.414s-3.348,5.723-1.388,9.971C3.684,29.822,7.484,32.245,10.211,30.988z M32.206,20.878 c3.7,0,6.7-4.674,6.7-10.439S35.906,0,32.206,0s-6.699,4.674-6.699,10.439C25.507,16.204,28.506,20.878,32.206,20.878z M45.727,15.602c-2.728-1.259-6.527,1.165-8.488,5.414s-1.339,8.713,1.389,9.972c2.728,1.258,6.527-1.166,8.488-5.414 S48.455,16.861,45.727,15.602z'/%3E%3C/svg%3E");
+    background-size: 48px 48px;
+    background-repeat: repeat;
+  }
+
+  .bg-blob {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .bg-blob::before,
+  .bg-blob::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 50%;
+    filter: blur(60px);
+  }
+  .bg-blob::before {
+    width: 480px;
+    height: 480px;
+    top: -120px;
+    right: -120px;
+    background: var(--color-peach);
+    opacity: 0.7;
+  }
+  .bg-blob::after {
+    width: 420px;
+    height: 420px;
+    bottom: -160px;
+    left: -120px;
+    background: var(--color-terracotta-soft);
+    opacity: 0.45;
+  }
+
+  .bg-grid {
+    position: relative;
+    isolation: isolate;
+  }
+  .bg-grid::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.04;
+    background-image:
+      linear-gradient(to right, var(--color-ink) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-ink) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .bg-watercolor {
+    position: relative;
+    isolation: isolate;
+  }
+  .bg-watercolor::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+    background:
+      radial-gradient(
+        ellipse 60% 80% at 20% 30%,
+        var(--color-peach) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 50% 70% at 80% 70%,
+        var(--color-terracotta-soft) 0%,
+        transparent 65%
+      ),
+      radial-gradient(
+        ellipse 100% 100% at 50% 50%,
+        var(--color-cream) 0%,
+        var(--color-cream) 80%
+      );
+  }
+
+  /* Pattern-aware child stacking */
+  .has-pattern > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cinematic-video {
+    background: #d9c8b5;
+  }
+
+  .cinematic-video::-webkit-media-controls,
+  .cinematic-video::-webkit-media-controls-enclosure,
+  .cinematic-video::-webkit-media-controls-panel {
+    /* biome-ignore lint/complexity/noImportantStyles: required to suppress native media controls in WebKit. */
+    display: none !important;
+    -webkit-appearance: none;
+  }
+
+  /* Short screen height optimizations for the sticky hero */
+  @media (max-height: 820px) {
+    .hero-sticky-container {
+      /* biome-ignore lint/complexity/noImportantStyles: required to override utility paddings on short screens. */
+      padding-top: clamp(4rem, 8vh, 5.5rem) !important;
+      /* biome-ignore lint/complexity/noImportantStyles: required to override utility paddings on short screens. */
+      padding-bottom: clamp(0.25rem, 1.5vh, 0.75rem) !important;
+    }
+
+    .hero-video-placeholder {
+      /* biome-ignore lint/complexity/noImportantStyles: required to override layout min-heights on short screens. */
+      min-height: clamp(10rem, 22vh, 15rem) !important;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* ─────── Hover micro-interactions ─────── */
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 320ms ease;
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+
+  /* Anchor scroll offset (compensate for sticky header) */
+  [id] {
+    scroll-margin-top: 6rem;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  /* Safe centering for overflowing flex containers */
+  .justify-safe-center {
+    justify-content: center;
+    /* biome-ignore lint/suspicious/noDuplicateProperties: fallback above supports browsers without safe alignment. */
+    justify-content: safe center;
+  }
+
+  .sticky-manifesto-cards {
+    --sticky-top: 12vh;
+  }
+  @media (min-width: 768px) {
+    .sticky-manifesto-cards {
+      --sticky-top: 18vh;
+    }
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 50s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* biome-ignore lint/style/noDescendingSpecificity: global reduced-motion reset intentionally comes after component utilities. */
+  *,
+  *::before,
+  *::after {
+    /* biome-ignore lint/complexity/noImportantStyles: reduced-motion overrides must beat component animation styles. */
+    animation-duration: 0.001ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: reduced-motion overrides must beat component animation styles. */
+    animation-iteration-count: 1 !important;
+    /* biome-ignore lint/complexity/noImportantStyles: reduced-motion overrides must beat component animation styles. */
+    transition-duration: 0.001ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: reduced-motion overrides must beat component animation styles. */
+    scroll-behavior: auto !important;
+  }
 }

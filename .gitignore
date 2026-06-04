@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# agent metadata and logs
+.antigravitycli/
+.hermes/
+plan.md
+dev-server.log
+backups/
+
