@@ -87,85 +87,95 @@ export default async function PostPage({ params }: PostPageProps) {
 
   const postUrl = `${process.env.NEXT_PUBLIC_SITE_URL || "https://inajeducation.com"}/blog/${slug}`;
 
+  const heroFallbackImages = [
+    "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1600&h=900&fit=crop",
+    "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=1600&h=900&fit=crop",
+    "https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?w=1600&h=900&fit=crop",
+    "https://images.unsplash.com/photo-1450778869180-cfe0f6b5ad40?w=1600&h=900&fit=crop",
+  ];
+  const heroHash = post.title
+    .split("")
+    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const heroFallback = heroFallbackImages[heroHash % heroFallbackImages.length];
+
   return (
     <main>
-      {post.mainImage && (
-        <section className="relative h-[60vh] min-h-[500px] overflow-hidden">
-          <Image
-            src={urlFor(post.mainImage).width(1600).height(900).url()}
-            alt={post.mainImage.alt || post.title}
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/30 to-transparent" />
-          <div className="absolute top-6 left-6">
-            <a
-              href="/blog"
-              className="flex items-center gap-2 text-sm text-cream/70 transition-colors hover:text-cream"
+      <section className="relative h-[60vh] min-h-[500px] overflow-hidden">
+        <Image
+          src={
+            post.mainImage
+              ? urlFor(post.mainImage).width(1600).height(900).url()
+              : heroFallback
+          }
+          alt={post.mainImage?.alt || post.title}
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/30 to-transparent" />
+        <div className="absolute top-6 left-6">
+          <a
+            href="/blog"
+            className="flex items-center gap-2 text-sm text-cream/70 transition-colors hover:text-cream"
+          >
+            <svg
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <svg
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <title>Back arrow</title>
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
+              <title>Back arrow</title>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            Back to Journal
+          </a>
+        </div>
+        <div className="absolute inset-0 flex items-end">
+          <div className="container-editorial pb-12">
+            {post.categories?.[0] && (
+              <p className="eyebrow text-cream/80">
+                {post.categories[0].title}
+              </p>
+            )}
+            <h1 className="display-1 mt-4 text-cream">{post.title}</h1>
+            <div className="mt-6 flex items-center gap-4">
+              {post.author?.image && (
+                <Image
+                  src={urlFor(post.author.image).width(40).height(40).url()}
+                  alt={post.author.name}
+                  width={40}
+                  height={40}
+                  className="rounded-full"
                 />
-              </svg>
-              Back to Journal
-            </a>
-          </div>
-          <div className="absolute inset-0 flex items-end">
-            <div className="container-editorial pb-12">
-              {post.categories?.[0] && (
-                <p className="eyebrow text-cream/80">
-                  {post.categories[0].title}
-                </p>
               )}
-              <h1 className="display-1 mt-4 text-cream">{post.title}</h1>
-              <div className="mt-6 flex items-center gap-4">
-                {post.author?.image && (
-                  <Image
-                    src={urlFor(post.author.image).width(40).height(40).url()}
-                    alt={post.author.name}
-                    width={40}
-                    height={40}
-                    className="rounded-full"
-                  />
+              <div className="flex items-center gap-3 text-sm text-cream/70">
+                {post.author?.name && (
+                  <span className="font-medium text-cream">
+                    {post.author.name}
+                  </span>
                 )}
-                <div className="flex items-center gap-3 text-sm text-cream/70">
-                  {post.author?.name && (
-                    <span className="font-medium text-cream">
-                      {post.author.name}
-                    </span>
-                  )}
-                  {post.publishedAt && (
-                    <>
-                      <span>·</span>
-                      <time dateTime={post.publishedAt}>
-                        {new Date(post.publishedAt).toLocaleDateString(
-                          "en-US",
-                          {
-                            month: "long",
-                            day: "numeric",
-                            year: "numeric",
-                          },
-                        )}
-                      </time>
-                    </>
-                  )}
-                </div>
+                {post.publishedAt && (
+                  <>
+                    <span>·</span>
+                    <time dateTime={post.publishedAt}>
+                      {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </time>
+                  </>
+                )}
               </div>
             </div>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       <article className="section">
         <div className="container-editorial">
