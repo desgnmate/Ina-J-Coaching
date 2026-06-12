@@ -406,11 +406,6 @@ export function Hero() {
     const p = Math.max(0, Math.min(1, progress));
     setVideoMinimized(p > 0.45);
 
-    // Dispatch scroll progress so Header can sync its fade-in
-    window.dispatchEvent(
-      new CustomEvent("hero-scroll", { detail: { progress: p } }),
-    );
-
     animWidth.set(
       interpolate(p, 0, 0.45, coords.centered.width, coords.settled.width),
     );
@@ -433,6 +428,13 @@ export function Hero() {
     contentOpacity.set(interpolate(p, 0.45, 0.75, 0, 1));
     collageOpacity.set(interpolate(p, 0.55, 0.85, 0, 1));
     collageY.set(interpolate(p, 0.55, 0.85, 40, 0));
+
+    // Notify header of content opacity for synchronized fade-in
+    window.dispatchEvent(
+      new CustomEvent("hero-content-opacity", {
+        detail: { opacity: interpolate(p, 0.45, 0.75, 0, 1) },
+      }),
+    );
 
     const volumeFactor = clamp(interpolate(p, 0, 0.45, 1, 0), 0, 1);
     const video = getActiveVideo();
