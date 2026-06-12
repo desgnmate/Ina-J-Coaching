@@ -194,7 +194,7 @@ export function Pillars() {
 
                   {/* Card Container - No horizontal or vertical staggered offsets */}
                   <div
-                    className={`group relative rounded-[2rem] border p-8 select-none transition-[border-color,background-color,box-shadow] duration-300 md:p-10 ${
+                    className={`group relative rounded-[2rem] border p-8 select-none transition-[border-color,background-color,box-shadow] duration-300 md:p-10 overflow-hidden ${
                       isActive
                         ? "border-terracotta/28 bg-cream shadow-[0_16px_32px_-22px_rgba(68,53,61,0.14)]"
                         : "border-line/75 bg-cream shadow-[0_8px_18px_-22px_rgba(68,53,61,0.05)]"
