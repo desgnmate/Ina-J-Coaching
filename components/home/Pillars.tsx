@@ -196,8 +196,8 @@ export function Pillars() {
                   <div
                     className={`group relative rounded-[2rem] border p-8 select-none transition-[border-color,background-color,box-shadow] duration-300 md:p-10 ${
                       isActive
-                        ? "border-terracotta/28 bg-[#FFF8F3] shadow-[0_16px_32px_-22px_rgba(68,53,61,0.14)]"
-                        : "border-line/75 bg-[rgba(255,248,243,0.5)] shadow-[0_8px_18px_-22px_rgba(68,53,61,0.05)]"
+                        ? "border-terracotta/28 bg-cream shadow-[0_16px_32px_-22px_rgba(68,53,61,0.14)]"
+                        : "border-line/75 bg-cream shadow-[0_8px_18px_-22px_rgba(68,53,61,0.05)]"
                     }`}
                     style={{ backdropFilter: "blur(8px)" }}
                   >
