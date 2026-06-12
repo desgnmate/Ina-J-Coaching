@@ -106,7 +106,7 @@ export default async function PostPage({ params }: PostPageProps) {
   ];
   const heroHash = post.title
     .split("")
-    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    .reduce((acc: number, char: string) => acc + char.charCodeAt(0), 0);
   const heroFallback = heroFallbackImages[heroHash % heroFallbackImages.length];
 
   return (

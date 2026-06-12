@@ -35,7 +35,7 @@ const FALLBACK_IMAGES = [
 function getFallbackImage(title: string) {
   const hash = title
     .split("")
-    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    .reduce((acc: number, char: string) => acc + char.charCodeAt(0), 0);
   return FALLBACK_IMAGES[hash % FALLBACK_IMAGES.length];
 }
 
