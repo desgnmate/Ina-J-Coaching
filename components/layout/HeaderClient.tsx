@@ -30,16 +30,9 @@ export function HeaderClient({ bookingHref, links }: Props) {
       const scrollY = window.scrollY;
 
       if (pathname === "/") {
-        // Hide header when video is maximized (top of page), show when minimized
-        const heroEl = document.getElementById("hero");
-        const heroHeight = heroEl
-          ? heroEl.offsetHeight
-          : window.innerHeight * 1.3;
-        const triggerPoint = heroHeight - window.innerHeight + 80;
-        const isScrolledPastHero = scrollY > triggerPoint;
-
-        setScrolled(isScrolledPastHero);
-        setHeaderOpacity(isScrolledPastHero ? 1 : 0);
+        // Hide header when video is maximized (at very top), show as soon as user scrolls
+        setScrolled(scrollY > 50);
+        setHeaderOpacity(scrollY > 50 ? 1 : 0);
       } else {
         setScrolled(scrollY > 50);
         setHeaderOpacity(1);
