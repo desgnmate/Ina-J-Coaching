@@ -27,11 +27,19 @@ export const revalidate = 60;
 export default async function BlogPage() {
   const client = getClient(false);
 
-  const [posts, categories, featuredPosts] = await Promise.all([
-    client.fetch(postsQuery, { start: 0, end: 20 }),
-    client.fetch(categoriesQuery),
-    client.fetch(featuredPostsQuery),
-  ]);
+  let posts: any[] = [];
+  let categories: any[] = [];
+  let featuredPosts: any[] = [];
+
+  try {
+    [posts, categories, featuredPosts] = await Promise.all([
+      client.fetch(postsQuery, { start: 0, end: 20 }),
+      client.fetch(categoriesQuery),
+      client.fetch(featuredPostsQuery),
+    ]);
+  } catch (error) {
+    console.error("Failed to fetch blog data from Sanity:", error);
+  }
 
   return (
     <main>

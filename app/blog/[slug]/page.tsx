@@ -71,19 +71,30 @@ export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
   const { isEnabled: isDraft } = await draftMode();
   const client = getClient(isDraft);
-  const post = await client.fetch(postBySlugQuery, { slug });
+
+  let post: any = null;
+  try {
+    post = await client.fetch(postBySlugQuery, { slug });
+  } catch (error) {
+    console.error("Failed to fetch post from Sanity:", error);
+  }
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts =
-    post.categories?.length > 0
-      ? await client.fetch(relatedPostsQuery, {
-          postId: post._id,
-          categoryIds: post.categories.map((cat: any) => cat._id),
-        })
-      : [];
+  let relatedPosts: any[] = [];
+  try {
+    relatedPosts =
+      post.categories?.length > 0
+        ? await client.fetch(relatedPostsQuery, {
+            postId: post._id,
+            categoryIds: post.categories.map((cat: any) => cat._id),
+          })
+        : [];
+  } catch (error) {
+    console.error("Failed to fetch related posts:", error);
+  }
 
   const postUrl = `${process.env.NEXT_PUBLIC_SITE_URL || "https://inajeducation.com"}/blog/${slug}`;
 
