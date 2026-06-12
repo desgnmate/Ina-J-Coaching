@@ -157,7 +157,7 @@ export function Pillars() {
             {/* Visual vertical timeline connectors - closer to left edge */}
             <div
               style={{ left: "var(--timeline-left)" }}
-              className="absolute top-[46px] bottom-10 w-[2px] bg-line/70"
+              className="absolute top-[46px] bottom-0 w-[2px] bg-line/70"
             />
 
             {/* Animated Progress Line */}
