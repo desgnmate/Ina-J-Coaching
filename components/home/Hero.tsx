@@ -406,6 +406,11 @@ export function Hero() {
     const p = Math.max(0, Math.min(1, progress));
     setVideoMinimized(p > 0.45);
 
+    // Dispatch scroll progress so Header can sync its fade-in
+    window.dispatchEvent(
+      new CustomEvent("hero-scroll", { detail: { progress: p } }),
+    );
+
     animWidth.set(
       interpolate(p, 0, 0.45, coords.centered.width, coords.settled.width),
     );

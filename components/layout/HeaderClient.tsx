@@ -26,17 +26,43 @@ export function HeaderClient({ bookingHref, links }: Props) {
       : "/brand/inajeducation-logo-light.png";
 
   useEffect(() => {
+    if (pathname !== "/") return;
+
+    let receivedHeroEvent = false;
+
+    const onHeroScroll = (e: Event) => {
+      receivedHeroEvent = true;
+      const { progress } = (e as CustomEvent).detail;
+      // Fade in between progress 0.45 and 0.75 (matching hero contentOpacity)
+      const opacity =
+        progress <= 0.45 ? 0 : progress >= 0.75 ? 1 : (progress - 0.45) / 0.3;
+      setHeaderOpacity(opacity);
+      setScrolled(progress > 0.45);
+    };
+
+    // Fallback for mobile (Hero doesn't dispatch events on mobile)
+    const onFallbackScroll = () => {
+      if (receivedHeroEvent) return;
+      const scrollY = window.scrollY;
+      setScrolled(scrollY > 50);
+      setHeaderOpacity(scrollY > 50 ? 1 : 0);
+    };
+
+    window.addEventListener("hero-scroll", onHeroScroll);
+    window.addEventListener("scroll", onFallbackScroll, { passive: true });
+    return () => {
+      window.removeEventListener("hero-scroll", onHeroScroll);
+      window.removeEventListener("scroll", onFallbackScroll);
+    };
+  }, [pathname]);
+
+  useEffect(() => {
+    if (pathname === "/") return;
+
     const onScroll = () => {
       const scrollY = window.scrollY;
-
-      if (pathname === "/") {
-        // Hide header when video is maximized (at very top), show as soon as user scrolls
-        setScrolled(scrollY > 50);
-        setHeaderOpacity(scrollY > 50 ? 1 : 0);
-      } else {
-        setScrolled(scrollY > 50);
-        setHeaderOpacity(1);
-      }
+      setScrolled(scrollY > 50);
+      setHeaderOpacity(1);
     };
 
     onScroll();
@@ -54,7 +80,7 @@ export function HeaderClient({ bookingHref, links }: Props) {
   return (
     <header
       style={{ opacity: headerOpacity }}
-      className={`fixed inset-x-0 top-0 z-40 transition-[background-color,backdrop-filter,box-shadow] duration-500 ease-in-out ${
+      className={`fixed inset-x-0 top-0 z-40 transition-[opacity,background-color,backdrop-filter,box-shadow] duration-500 ease-in-out ${
         headerOpacity === 0 ? "pointer-events-none" : ""
       } ${
         scrolled
