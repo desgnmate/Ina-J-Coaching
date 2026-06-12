@@ -30,15 +30,16 @@ export function HeaderClient({ bookingHref, links }: Props) {
       const scrollY = window.scrollY;
 
       if (pathname === "/") {
-        setHeaderOpacity(1);
-
-        // Delay background color until the bottom of the viewport enters the next section (with 80px allowance)
+        // Hide header when video is maximized (top of page), show when minimized
         const heroEl = document.getElementById("hero");
         const heroHeight = heroEl
           ? heroEl.offsetHeight
           : window.innerHeight * 1.3;
         const triggerPoint = heroHeight - window.innerHeight + 80;
-        setScrolled(scrollY > triggerPoint);
+        const isScrolledPastHero = scrollY > triggerPoint;
+
+        setScrolled(isScrolledPastHero);
+        setHeaderOpacity(isScrolledPastHero ? 1 : 0);
       } else {
         setScrolled(scrollY > 50);
         setHeaderOpacity(1);
