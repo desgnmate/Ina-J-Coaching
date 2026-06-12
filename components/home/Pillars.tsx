@@ -157,7 +157,7 @@ export function Pillars() {
             {/* Visual vertical timeline connectors - closer to left edge */}
             <div
               style={{ left: "var(--timeline-left)" }}
-              className="absolute top-10 bottom-10 w-[2px] bg-line/70"
+              className="absolute top-[46px] bottom-10 w-[2px] bg-line/70"
             />
 
             {/* Animated Progress Line */}
@@ -165,7 +165,7 @@ export function Pillars() {
               style={{ left: "var(--timeline-left)" }}
               animate={{ height: heights[activeStep] }}
               transition={{ type: "spring", stiffness: 80, damping: 20 }}
-              className="absolute top-10 w-[2px] bg-terracotta origin-top z-10"
+              className="absolute top-[46px] w-[2px] bg-terracotta origin-top z-10"
             />
 
             {methodology.map((item, i) => {
