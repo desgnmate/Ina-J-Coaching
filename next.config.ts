@@ -13,6 +13,11 @@ const config: NextConfig = {
         hostname: "*.photobiz.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        pathname: "/**",
+      },
     ],
   },
 

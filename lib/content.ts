@@ -285,7 +285,7 @@ export const footer = {
       title: "Future Library",
       links: [
         { label: "Free Resources", href: "/resources" },
-        { label: "Blog, coming soon", href: "/resources" },
+        { label: "Blog", href: "/blog" },
         { label: "Instagram", href: site.socials.instagram },
         { label: "Facebook", href: site.socials.facebook },
       ],
