@@ -35,11 +35,18 @@ export function WhoFor() {
   ].filter((item) => item.text && item.image);
 
   return (
-    <section className="bg-blob panel-peach section has-pattern relative overflow-hidden">
+    <section className="bg-cream-deep bg-blob section has-pattern relative overflow-hidden">
       <div className="container-editorial relative">
         {/* Intro Header — Pillars-style two-column layout */}
         <div className="grid items-end gap-10 md:grid-cols-12 md:gap-16">
-          <div className="md:col-span-7">
+          <div
+            className="md:col-span-7"
+            style={{
+              transform: "translate3d(0, 0, 0)",
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+            }}
+          >
             <SectionHeading
               eyebrow={whoFor.eyebrow}
               headline={
@@ -77,8 +84,8 @@ export function WhoFor() {
                       </span>
                     </div>
                     {/* Description Copy */}
-                    <div className="md:col-span-8 lg:col-span-9">
-                      <p className="font-display text-base md:text-lg lg:text-xl text-ink-soft leading-relaxed text-pretty transition-colors duration-300 group-hover:text-ink">
+                    <div className="md:col-span-8 lg:col-span-9 md:pr-8 lg:pr-12">
+                      <p className="font-display text-base md:text-lg lg:text-xl text-ink-soft leading-relaxed text-pretty transition-colors duration-300 group-hover:text-ink md:line-clamp-2">
                         {cat.text}
                       </p>
                     </div>

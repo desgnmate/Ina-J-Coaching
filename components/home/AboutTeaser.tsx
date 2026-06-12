@@ -108,7 +108,7 @@ export function AboutTeaser() {
               style={{
                 opacity: gradientOpacity,
                 background:
-                  "linear-gradient(90deg, rgba(202, 95, 60, 0) 0%, rgba(202, 95, 60, 0.55) 55%, rgba(202, 95, 60, 0.85) 100%)",
+                  "linear-gradient(90deg, rgba(212, 104, 88, 0) 0%, rgba(212, 104, 88, 0.55) 55%, rgba(212, 104, 88, 0.85) 100%)",
               }}
               initial={false}
             />
@@ -134,7 +134,7 @@ export function AboutTeaser() {
                   <p className="lead mt-6 max-w-xl text-cream/95">
                     {aboutTeaser.body}
                   </p>
-                  <p className="body-lg mt-5 max-w-xl italic text-cream/85">
+                  <p className="body-lg mt-5 max-w-xl text-cream/85">
                     {aboutTeaser.personal}
                   </p>
                   <div className="mt-10">
@@ -176,15 +176,13 @@ export function AboutTeaser() {
         </div>
 
         <div className="container-editorial relative -mt-24 pb-24">
-          <div className="rounded-3xl bg-terracotta p-8 shadow-xl shadow-ink/20">
+          <div className="rounded-3xl bg-ink p-8 shadow-xl shadow-ink/20">
             <p className="eyebrow text-cream/90">{aboutTeaser.eyebrow}</p>
             <h2 className="display-2 mt-4 text-balance text-cream">
               {aboutTeaser.headline}
             </h2>
             <p className="lead mt-5 text-cream/95">{aboutTeaser.body}</p>
-            <p className="body-lg mt-4 italic text-cream/85">
-              {aboutTeaser.personal}
-            </p>
+            <p className="body-lg mt-4 text-cream/85">{aboutTeaser.personal}</p>
             <div className="mt-8">
               <a
                 href={aboutTeaser.cta.href}

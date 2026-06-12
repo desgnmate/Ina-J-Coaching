@@ -2,7 +2,7 @@
 
 import { ChatCenteredText, Compass, Sparkle } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { pillars } from "@/lib/content";
@@ -18,7 +18,7 @@ const methodology = [
     number: "02",
     title: "Intentional Marketing",
     description:
-      "Replace guesswork with a simple, repeatable marketing plan that attracts enquiries from the right people — even when you're not posting every day.",
+      "Replace guesswork with a simple, repeatable marketing plan that attracts enquiries from the right people, even when you're not posting every day.",
   },
   {
     number: "03",
@@ -35,7 +35,7 @@ function MethodologyIcon({
   index: number;
   active: boolean;
 }) {
-  const stroke = active ? "#CA5F3C" : "#5A463A";
+  const stroke = active ? "#D46858" : "#715860";
   const weight = "light";
 
   return (
@@ -49,6 +49,29 @@ function MethodologyIcon({
     </div>
   );
 }
+
+const PillarsIntro = memo(function PillarsIntro() {
+  return (
+    <Reveal from="left">
+      <SectionHeading
+        eyebrow={pillars.eyebrow}
+        headline={
+          <>
+            Practical coaching from someone who&apos;s{" "}
+            <span className="italic text-terracotta">built it.</span>{" "}
+          </>
+        }
+        as="h2"
+        className="!mt-0"
+      />
+      <p className="lead mt-6 max-w-sm text-ink-soft leading-relaxed">
+        Posting more isn&rsquo;t the solution. Ina&apos;s methodology directly
+        solves the friction points in your client journey, transforming creative
+        talent into a strategic, repeatable business model.
+      </p>
+    </Reveal>
+  );
+});
 
 export function Pillars() {
   const [activeStep, setActiveStep] = useState(0);
@@ -110,37 +133,13 @@ export function Pillars() {
   return (
     <section
       ref={containerRef}
-      className="bg-dots panel-cream section has-pattern relative overflow-hidden py-24 md:py-32"
+      className="bg-cream-deep bg-dots section has-pattern relative overflow-hidden py-24 md:py-32"
     >
-      {/* Ambient Terracotta Glow Accents */}
-      <div className="absolute top-1/4 right-12 -z-10 h-80 w-80 rounded-full bg-terracotta/6 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/3 -z-10 h-80 w-80 rounded-full bg-terracotta/4 blur-[120px] pointer-events-none" />
-
       <div className="container-editorial relative">
         <div className="grid items-start gap-12 md:grid-cols-12 md:gap-16">
           {/* Sticky Left Column - Headline & Copy */}
-          <div className="md:col-span-5 md:sticky md:top-28 h-fit">
-            <Reveal from="left">
-              <SectionHeading
-                eyebrow={pillars.eyebrow}
-                headline={
-                  <>
-                    Practical coaching from someone who's{" "}
-                    <span className="italic text-terracotta">
-                      built it.
-                    </span>{" "}
-                  </>
-                }
-                as="h2"
-                className="!mt-0"
-              />
-              <p className="lead mt-6 max-w-sm text-ink-soft leading-relaxed">
-                Posting more isn&rsquo;t the solution. Ina's methodology
-                directly solves the friction points in your client journey,
-                transforming creative talent into a strategic, repeatable
-                business model.
-              </p>
-            </Reveal>
+          <div className="h-fit md:sticky md:top-28 md:col-span-5">
+            <PillarsIntro />
           </div>
 
           {/* Right Column - Vertically Aligned Cards & Interactive Connector System */}
@@ -158,7 +157,7 @@ export function Pillars() {
             {/* Visual vertical timeline connectors - closer to left edge */}
             <div
               style={{ left: "var(--timeline-left)" }}
-              className="absolute top-10 bottom-10 w-[2px] bg-[#e3d6bf]/35"
+              className="absolute top-10 bottom-10 w-[2px] bg-line/70"
             />
 
             {/* Animated Progress Line */}
@@ -188,26 +187,17 @@ export function Pillars() {
                     }}
                     className={`absolute top-[46px] h-3 w-3 rounded-full border-2 transition-all duration-500 z-20 ${
                       isCircleActive
-                        ? "border-terracotta bg-terracotta shadow-[0_0_8px_2px_rgba(202,95,60,0.35)]"
-                        : "border-[#e3d6bf]/60 bg-[#faf5ec]"
+                        ? "border-terracotta bg-terracotta shadow-[0_0_8px_2px_rgba(212,104,88,0.2)]"
+                        : "border-line bg-cream"
                     }`}
-                  />
-
-                  {/* Softened Terracotta Ambient Glow Layer behind card (sibling to avoid nested backdrop-filter blur rendering) */}
-                  <div
-                    className="absolute inset-0 -z-10 rounded-[2rem] bg-terracotta/4 transition-opacity duration-[900ms] pointer-events-none"
-                    style={{
-                      filter: "blur(48px)",
-                      opacity: isActive ? 1 : 0,
-                    }}
                   />
 
                   {/* Card Container - No horizontal or vertical staggered offsets */}
                   <div
-                    className={`group relative rounded-[2rem] border transition-[border-color,background-color,transform,box-shadow] duration-500 p-8 md:p-10 select-none will-change-[transform,box-shadow] ${
+                    className={`group relative rounded-[2rem] border p-8 select-none transition-[border-color,background-color,box-shadow] duration-300 md:p-10 ${
                       isActive
-                        ? "border-terracotta/25 bg-[#fdfcfb] scale-[1.012] shadow-[0_20px_50px_-16px_rgba(202,95,60,0.08)]"
-                        : "border-white/30 bg-[#faf5ec]/45 scale-100 shadow-[0_10px_24px_-20px_rgba(43,31,23,0.04)]"
+                        ? "border-terracotta/28 bg-[#FFF8F3] shadow-[0_16px_32px_-22px_rgba(68,53,61,0.14)]"
+                        : "border-line/75 bg-[rgba(255,248,243,0.5)] shadow-[0_8px_18px_-22px_rgba(68,53,61,0.05)]"
                     }`}
                     style={{ backdropFilter: "blur(8px)" }}
                   >
@@ -218,7 +208,7 @@ export function Pillars() {
                       {/* Top Header Row: Icon, Title & Step Identifier */}
                       <div className="flex justify-between items-start w-full">
                         <div className="flex gap-4 items-center z-10">
-                          <div className="flex-shrink-0 transition-transform duration-500 group-hover:scale-105">
+                          <div className="flex-shrink-0">
                             <MethodologyIcon index={i} active={isActive} />
                           </div>
 
@@ -232,7 +222,7 @@ export function Pillars() {
                             >
                               Step {item.number}
                             </span>
-                            <h3 className="font-display text-xl md:text-2xl text-ink mt-1 transition-colors duration-300 group-hover:text-terracotta">
+                            <h3 className="mt-1 font-display text-xl text-ink transition-colors duration-300 md:text-2xl">
                               {item.title}
                             </h3>
                           </div>

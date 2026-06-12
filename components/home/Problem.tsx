@@ -44,7 +44,7 @@ const framework = [
 type IconName = (typeof framework)[number]["icon"];
 
 function FrameworkIcon({ name, active }: { name: IconName; active: boolean }) {
-  const stroke = active ? "#CA5F3C" : "#5A463A";
+  const stroke = active ? "#D46858" : "#715860";
   const weight = "light";
   const iconClass =
     "h-12 w-12 md:h-14 md:w-14 transition-colors duration-[900ms]";
@@ -240,58 +240,44 @@ export function Problem() {
         <div ref={shellRef} className="mx-auto mt-9 max-w-6xl md:mt-10">
           <div className="relative">
             {connector.ready ? (
-              <>
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute rounded-full bg-terracotta/30 blur-[110px] transition-all duration-[900ms] ease-out"
-                  style={{
-                    left: connector.glowX,
-                    top: connector.glowY,
-                    width: connector.glowW,
-                    height: connector.glowH,
-                    opacity: 1,
-                  }}
+              <svg
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 hidden h-full w-full md:block"
+              >
+                <motion.line
+                  x1={connector.lineStartX}
+                  y1={connector.lineY}
+                  x2={connector.lineEndX}
+                  y2={connector.lineY}
+                  stroke="rgba(201,183,156,0.9)"
+                  strokeWidth="1.35"
                 />
-
-                <svg
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 hidden h-full w-full md:block"
-                >
-                  <motion.line
-                    x1={connector.lineStartX}
-                    y1={connector.lineY}
-                    x2={connector.lineEndX}
-                    y2={connector.lineY}
-                    stroke="rgba(201,183,156,0.9)"
-                    strokeWidth="1.35"
-                  />
-                  <motion.line
-                    x1={connector.lineStartX}
-                    y1={connector.lineY}
-                    x2={connector.dotX}
-                    y2={connector.lineY}
-                    stroke="rgba(202,95,60,0.58)"
-                    strokeWidth="1.8"
-                    transition={{ duration: 0.85, ease: "easeOut" }}
-                  />
-                  <motion.circle
-                    cx={connector.dotX}
-                    cy={connector.lineY}
-                    r="5.5"
-                    fill="rgba(202,95,60,0.82)"
-                    transition={{ duration: 0.85, ease: "easeOut" }}
-                  />
-                  <motion.line
-                    x1={connector.activeBottomX}
-                    y1={connector.activeBottomY}
-                    x2={connector.panelTopX}
-                    y2={connector.panelTopY}
-                    stroke="rgba(202,95,60,0.4)"
-                    strokeWidth="1.4"
-                    transition={{ duration: 0.85, ease: "easeOut" }}
-                  />
-                </svg>
-              </>
+                <motion.line
+                  x1={connector.lineStartX}
+                  y1={connector.lineY}
+                  x2={connector.dotX}
+                  y2={connector.lineY}
+                  stroke="rgba(202,95,60,0.58)"
+                  strokeWidth="1.8"
+                  transition={{ duration: 0.85, ease: "easeOut" }}
+                />
+                <motion.circle
+                  cx={connector.dotX}
+                  cy={connector.lineY}
+                  r="5.5"
+                  fill="rgba(202,95,60,0.82)"
+                  transition={{ duration: 0.85, ease: "easeOut" }}
+                />
+                <motion.line
+                  x1={connector.activeBottomX}
+                  y1={connector.activeBottomY}
+                  x2={connector.panelTopX}
+                  y2={connector.panelTopY}
+                  stroke="rgba(202,95,60,0.4)"
+                  strokeWidth="1.4"
+                  transition={{ duration: 0.85, ease: "easeOut" }}
+                />
+              </svg>
             ) : null}
 
             <div className="grid gap-3 md:grid-cols-5 md:items-center md:gap-3">
@@ -319,8 +305,8 @@ export function Problem() {
                     onBlur={() => setHovered(null)}
                     className={`group relative z-10 flex min-h-[116px] w-full flex-col items-center justify-center overflow-hidden rounded-[24px] border px-5 py-5 text-center transition-all duration-[900ms] md:min-h-[126px] md:px-6 md:py-5 ${
                       isActive
-                        ? "-translate-y-1 scale-[1.02] border-terracotta/20 bg-[#faf5ec]/90 shadow-[0_0_0_1px_rgba(202,95,60,0.12),0_12px_30px_rgba(202,95,60,0.10),0_0_60px_rgba(202,95,60,0.12)]"
-                        : "border-white/30 bg-[rgba(241,232,216,0.42)] shadow-[0_10px_24px_-22px_rgba(43,31,23,0.08)]"
+                        ? "-translate-y-1 scale-[1.02] border-line bg-[#FFF8F3] shadow-[0_0_0_1px_rgba(212,104,88,0.12),0_12px_30px_rgba(68,53,61,0.08)]"
+                        : "border-line bg-[#EFDFD6] shadow-[0_10px_24px_-22px_rgba(68,53,61,0.08)]"
                     }`}
                     style={{ backdropFilter: "blur(18px)" }}
                   >

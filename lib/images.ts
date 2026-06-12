@@ -25,6 +25,26 @@ export const images = {
   },
   cta: {
     src: "/images/home/cta-new.png",
-    alt: "A premium professional pet photography shot of a beautiful dog in a sunlit forest during golden hour - Ina J Coaching",
+    alt: "Black and white puppy under pink blossoms",
+  },
+  podcastHero: {
+    src: "/images/home/hero-three-dogs.jpg",
+    alt: "Three dogs together in a pet photography portrait",
+  },
+  coachingFeature: {
+    src: "https://image12.photobiz.com/7732/7_20230217021530_12724977_xlarge.jpg",
+    alt: "Two dogs sitting together under autumn trees - Ina J Photography",
+  },
+  contactFeature: {
+    src: "https://image5.photobiz.com/8905/7_20230217021529_12724976_xlarge.jpg",
+    alt: "Golden retriever smiling portrait - Ina J Photography",
+  },
+  leadMagnetAccent: {
+    src: "/images/home/whoFor.jpg",
+    alt: "Pug portrait outdoors",
+  },
+  finalCta: {
+    src: "/images/home/cta-new.png",
+    alt: "Black and white puppy under pink blossoms",
   },
 };

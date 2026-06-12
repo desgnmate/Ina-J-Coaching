@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { footer, site } from "@/lib/content";
 
@@ -7,13 +8,18 @@ export function Footer() {
       <div className="container-editorial py-20">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <Link href="/" className="inline-block">
-              <span className="font-display text-2xl">
-                <span className="italic">Ina J</span>
-                <span className="ml-2 text-[0.7rem] uppercase tracking-[0.22em] text-terracotta-soft">
-                  Coaching
-                </span>
-              </span>
+            <Link
+              href="/"
+              aria-label="Ina J Education home"
+              className="relative block h-14 w-full max-w-[21rem]"
+            >
+              <Image
+                src="/brand/inajeducation-logo-dark.png"
+                alt="Ina J Education, pet photography coaching"
+                fill
+                sizes="336px"
+                className="object-contain object-left"
+              />
             </Link>
             <p className="mt-5 max-w-md text-sm leading-relaxed text-cream/75">
               {footer.brand}

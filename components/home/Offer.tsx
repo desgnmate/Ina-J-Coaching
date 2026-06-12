@@ -17,7 +17,7 @@ const coachingPillars = [
   },
   {
     label: "Marketing",
-    body: "Create a repeatable plan for consistent inquiries.",
+    body: "Create a repeatable plan for consistent enquiries.",
   },
   {
     label: "Experience",
@@ -61,7 +61,7 @@ export function Offer() {
                   <p className="eyebrow text-terracotta-soft tracking-[0.22em] mb-2">
                     {offer.eyebrow}
                   </p>
-                  <h3 className="font-display text-2xl italic text-cream md:text-3xl lg:text-4xl leading-tight max-w-sm text-balance">
+                  <h3 className="font-display text-2xl text-cream md:text-3xl lg:text-4xl leading-tight max-w-sm text-balance">
                     {offer.program}
                   </h3>
                   <p className="text-[0.6rem] tracking-[0.18em] uppercase text-cream/50 mt-4">

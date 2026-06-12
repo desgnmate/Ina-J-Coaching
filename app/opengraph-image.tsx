@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Ina J Coaching — Coaching for pet photographers";
+export const alt = "Ina J Education — Business coaching for pet photographers";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -15,9 +15,9 @@ export default function OgImage() {
         flexDirection: "column",
         justifyContent: "space-between",
         padding: "72px 80px",
-        background: "linear-gradient(135deg, #FAF5EC 0%, #F1E8D8 100%)",
+        background: "linear-gradient(135deg, #FFF8F3 0%, #EFDFD6 100%)",
         fontFamily: "Georgia, serif",
-        color: "#2B1F17",
+        color: "#44353D",
       }}
     >
       <div
@@ -27,7 +27,7 @@ export default function OgImage() {
           gap: "14px",
           fontSize: "20px",
           letterSpacing: "0.22em",
-          color: "#CA5F3C",
+          color: "#B08180",
           textTransform: "uppercase",
           fontFamily: "Helvetica, Arial, sans-serif",
           fontWeight: 500,
@@ -38,8 +38,8 @@ export default function OgImage() {
             width: 48,
             height: 48,
             borderRadius: 12,
-            background: "#CA5F3C",
-            color: "#FAF5EC",
+            background: "#D46858",
+            color: "#FFF8F3",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -50,7 +50,7 @@ export default function OgImage() {
         >
           ij
         </div>
-        <span>Ina J · Coaching</span>
+        <span>Ina J Education</span>
       </div>
 
       <div style={{ display: "flex", flexDirection: "column" }}>
@@ -63,20 +63,20 @@ export default function OgImage() {
             fontWeight: 400,
           }}
         >
-          Build a pet photography business that books consistently.
+          Business coaching for pet photographers still in the work.
         </div>
         <div
           style={{
             marginTop: 28,
             fontSize: 26,
             lineHeight: 1.5,
-            color: "#5A463A",
+            color: "#715860",
             maxWidth: 820,
             fontFamily: "Helvetica, Arial, sans-serif",
           }}
         >
-          Marketing and business coaching from an award-winning pet photographer
-          and Sony Digital Imaging Advocate.
+          Practical guidance for photographers who want clearer positioning,
+          steadier bookings, and a business that feels simpler to run.
         </div>
       </div>
 
@@ -86,14 +86,14 @@ export default function OgImage() {
           justifyContent: "space-between",
           alignItems: "flex-end",
           fontSize: 18,
-          color: "#7A6759",
+          color: "#B08180",
           fontFamily: "Helvetica, Arial, sans-serif",
           letterSpacing: "0.18em",
           textTransform: "uppercase",
         }}
       >
-        <span>coaching.inajphotography.com</span>
-        <span style={{ color: "#CA5F3C" }}>Ina J Photography</span>
+        <span>inajeducation.com</span>
+        <span style={{ color: "#D46858" }}>Ina J Education</span>
       </div>
     </div>,
     { ...size },

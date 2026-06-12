@@ -73,7 +73,7 @@ export function JourneyBody({ phases, sectionRef }: Props) {
           />
           <ol className="space-y-16">
             {phases.map((p, i) => (
-              <li key={p.year} className="relative flex items-start gap-4">
+              <li key={p.title} className="relative flex items-start gap-4">
                 <span
                   className={`relative z-10 mt-1.5 h-3.5 w-3.5 flex-shrink-0 rounded-full border-2 transition-colors duration-500 ${
                     active === i
@@ -85,7 +85,7 @@ export function JourneyBody({ phases, sectionRef }: Props) {
                   <p className="text-[0.65rem] uppercase tracking-[0.22em] text-terracotta">
                     {p.year}
                   </p>
-                  <p className="mt-1 font-display text-sm italic text-ink">
+                  <p className="mt-1 font-display text-sm text-ink">
                     {p.label}
                   </p>
                 </div>
@@ -108,7 +108,7 @@ export function JourneyBody({ phases, sectionRef }: Props) {
               <p className="text-[0.7rem] uppercase tracking-[0.22em] text-terracotta">
                 {t.year} · Act {String(i + 1).padStart(2, "0")}
               </p>
-              <p className="mt-3 font-display text-6xl italic leading-none text-ink md:text-7xl">
+              <p className="mt-3 font-display text-6xl leading-none text-ink md:text-7xl">
                 {String(i + 1).padStart(2, "0")}
               </p>
               <h3 className="display-3 mt-6 max-w-xl text-balance">

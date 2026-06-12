@@ -6,42 +6,43 @@ import { JourneySection } from "@/components/about/JourneySection";
 import { Button } from "@/components/shared/Button";
 import { Reveal } from "@/components/shared/Reveal";
 import { SplitText } from "@/components/shared/SplitText";
+import { StickyCta } from "@/components/shared/StickyCta";
 import { site } from "@/lib/content";
 import { images } from "@/lib/images";
 
 export const metadata: Metadata = {
   title: "About Ina",
   description:
-    "Canberra pet photographer, dog mum, and business mentor. The story behind Ina J Photography and the move into coaching other pet photographers.",
+    "The story behind Ina J Education, from Ina's public service background to a $305K+ pet photography studio and a coaching business built alongside it.",
 };
 
 const timeline = [
   {
     year: "2009",
     label: "Where it started",
-    title: "Photography as a side hustle",
-    body: "While working in the public service, Ina picked up a camera and never put it down. She spent the early years shooting families, newborns, and events — building her eye, her craft, and her love for the work alongside her day job.",
+    title: "Public service and photography side by side",
+    body: "While working in the Australian Public Service, Ina picked up a camera and never put it down. The early years built both craft and business discipline, long before photography became full-time.",
     image: images.about,
   },
   {
     year: "2019",
     label: "Mac, my heart dog",
     title: "Mac changed everything",
-    body: "Mac was Ina's heart dog. When he was diagnosed with heart failure, she poured herself into photographing him — wanting to hold onto every moment. Losing him in 2019 made one thing clear: pet owners deserve professional, timeless images of the animals who mean everything to them.",
+    body: "Mac was Ina's heart dog. Photographing him through illness made the work feel personal in a new way, and sharpened the conviction that pet owners deserve images with real emotional weight.",
     image: images.heroAlt,
   },
   {
     year: "2019",
     label: "The studio begins",
     title: "Ina J Photography begins",
-    body: "Ina launched her pet photography business the same year she lost Mac — a full-service studio built around emotional storytelling, bespoke artwork, and a deeply personal client experience. It has since grown into an award-winning brand serving dog families across Canberra.",
+    body: "Ina launched a full-service pet photography studio built around emotional storytelling, bespoke artwork, and a thoughtful client experience. The studio grew into an award-winning Canberra business with stronger average sales and fewer, higher-value sessions.",
     image: images.hero,
   },
   {
     year: "Today",
-    label: "Coaching others",
-    title: "Coaching other photographers",
-    body: "After building her own business, earning a Sony Digital Imaging Advocate partnership, and winning recognition including the 2021 Local Business Award and the 2022 Asia Pacific Photography Awards People's Choice, Ina now coaches other pet photographers — helping them find clarity in their marketing, confidence in their offer, and a business that actually feels like theirs.",
+    label: "Still in the business",
+    title: "Photography and coaching, together",
+    body: "Today the studio is still active, generating $305K+ a year while Ina coaches pet photographers around the world. The advice stays practical because the business is still in motion.",
     image: images.whoFor,
   },
 ];
@@ -111,33 +112,32 @@ const recognition = [
 export default function AboutPage() {
   return (
     <>
-      {/* ── 1 · Hero — Editorial Founder Story ── */}
+      {/* ── 1 · Hero · Editorial Founder Story ── */}
       <AboutHero />
 
-      {/* ── 2 · Journey — Pinned timeline + scrolling acts ── */}
+      {/* ── 2 · Journey · Pinned timeline + scrolling acts ── */}
       <JourneySection phases={timeline} />
 
-      {/* ── 4 · Values — Manifesto Style Rows ── */}
+      {/* ── 4 · Values · Manifesto Style Rows ── */}
       <AboutValues values={values} />
 
-      {/* ── 5 · Recognition — Dark stat bar ── */}
+      {/* ── 5 · Recognition · Dark stat bar ── */}
       <section className="bg-ink section relative overflow-hidden">
-        {/* Decorative terracotta glow */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-20 right-0 h-72 w-72 rounded-full bg-terracotta/10 blur-3xl"
+          className="pointer-events-none absolute -top-20 right-0 h-72 w-72 rounded-full bg-gold/12 blur-3xl"
         />
 
         <div className="container-editorial relative">
-          {/* Header — two-column */}
+          {/* Header · two-column */}
           <div className="grid items-end gap-10 md:grid-cols-12 md:gap-16">
             <div className="md:col-span-7">
-              <p className="text-[0.75rem] uppercase tracking-[0.18em] text-terracotta-soft font-medium">
+              <p className="text-gold text-[0.75rem] font-medium uppercase tracking-[0.18em]">
                 Recognition
               </p>
               <h2 className="display-2 mt-5 text-balance text-cream">
                 Trusted by clients,{" "}
-                <span className="italic text-terracotta-soft">
+                <span className="italic text-gold">
                   recognised by the industry.
                 </span>
               </h2>
@@ -156,7 +156,7 @@ export default function AboutPage() {
               {recognition.map((r) => (
                 <div
                   key={r.alt}
-                  className="group relative flex h-32 items-center justify-center rounded-2xl border border-cream/5 bg-ink-soft/30 p-5 shadow-sm transition-all duration-300 hover:scale-[1.03] hover:border-terracotta/30 hover:bg-ink-soft/50 hover:shadow-[0_8px_24px_rgba(202,95,60,0.1)]"
+                  className="group relative flex h-32 items-center justify-center rounded-2xl border border-cream/5 bg-ink-soft/30 p-5 shadow-sm transition-all duration-300 hover:scale-[1.03] hover:border-gold/30 hover:bg-ink-soft/50 hover:shadow-[0_8px_24px_rgba(176,129,128,0.12)]"
                 >
                   {/* biome-ignore lint/performance/noImgElement: using standard img to render live website assets */}
                   <img
@@ -182,7 +182,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── 6 · Final CTA — Homepage FinalCta match ── */}
+      {/* ── 6 · Final CTA · Homepage FinalCta match ── */}
       <section className="relative overflow-hidden">
         <div className="relative h-[480px] w-full md:h-[560px]">
           <Image
@@ -219,13 +219,13 @@ export default function AboutPage() {
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <Button href={site.bookingHref} variant="primary">
-                Book a Coaching Call
+                Book a call
                 <span aria-hidden>→</span>
               </Button>
               <Button
                 href="/contact"
                 variant="secondary"
-                className="border-cream text-cream hover:bg-cream hover:text-ink"
+                className="border-cream bg-transparent text-cream hover:bg-transparent hover:text-cream"
               >
                 Send a message
               </Button>
@@ -233,6 +233,7 @@ export default function AboutPage() {
           </Reveal>
         </div>
       </section>
+      <StickyCta href={site.bookingHref} label="Book a call" />
     </>
   );
 }

@@ -48,7 +48,7 @@ export function FinalCta() {
             <Button
               href="/contact"
               variant="secondary"
-              className="border-cream text-cream hover:bg-cream hover:text-ink"
+              className="border-cream bg-transparent text-cream hover:bg-transparent hover:text-cream"
             >
               Ask a question
             </Button>

@@ -588,7 +588,7 @@ export function Hero() {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative min-h-screen md:h-[130vh] md:min-h-0 overflow-visible bg-cream pb-4 md:pb-6"
+      className="relative min-h-screen md:h-[130vh] md:min-h-0 overflow-x-clip overflow-y-visible bg-cream pb-4 md:pb-6"
     >
       {/* Top-right/bottom-left background glow blobs clipped to section bounds */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-blob" />
@@ -676,7 +676,7 @@ export function Hero() {
             <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-12 xl:gap-16">
               <div className="max-w-[34rem] lg:pt-2">
                 <p className="eyebrow">{hero.eyebrow}</p>
-                <h1 className="mt-4 font-display text-[2.5rem] leading-[1.02] text-ink sm:text-[2.85rem] sm:max-w-[14ch] lg:text-[3.35rem] lg:max-w-[16ch] xl:text-[3.5rem]">
+                <h1 className="mt-4 font-display text-[2rem] leading-[1.08] text-ink sm:text-[2.25rem] sm:max-w-[18ch] lg:text-[2.75rem] lg:max-w-[20ch] xl:text-[3rem]">
                   {hero.primaryHeadline.map((line) => (
                     <span key={line} className="block text-balance">
                       {line}
@@ -1016,6 +1016,7 @@ export function Hero() {
                     src={image.src}
                     alt={image.alt}
                     fill
+                    unoptimized
                     sizes="(max-width: 768px) 240px, 320px"
                     className="object-cover transition-transform duration-700 ease-out hover:scale-[1.06]"
                     priority={i < 4}
@@ -1036,6 +1037,7 @@ export function Hero() {
                     src={image.src}
                     alt={image.alt}
                     fill
+                    unoptimized
                     sizes="(max-width: 768px) 240px, 320px"
                     className="object-cover transition-transform duration-700 ease-out hover:scale-[1.06]"
                     priority={i < 4}

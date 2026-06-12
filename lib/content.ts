@@ -1,143 +1,158 @@
+export type NavLink = { label: string; href: string };
+export type NavItem = NavLink & {
+  children?: NavLink[];
+};
+
 export const site = {
-  name: "Ina J Coaching",
-  parent: "Ina J Photography",
-  tagline: "Marketing and business coaching for pet photographers.",
+  name: "Ina J Education",
+  parent: "Ina J Education",
+  tagline: "Business coaching for pet photographers.",
   description:
-    "Practical coaching from an award-winning pet photographer helping other photographers build businesses with clearer messaging, intentional marketing, and consistent bookings.",
-  url: "https://coaching.inajphotography.com",
+    "Business coaching for pet photographers who want clearer positioning, stronger marketing, and more consistent bookings, from a photographer who is still actively in the business.",
+  url: "https://inajeducation.com",
   email: "ina@inajphotography.com",
   phone: "0410 974 091",
-  location: "Canberra · Australia · Online worldwide",
+  location: "Canberra, Australia. Online worldwide.",
   socials: {
-    instagram: "https://instagram.com/inajphotography",
+    instagram: "https://instagram.com/inaj.thepetphotoceo",
     facebook: "https://facebook.com/inajphotography",
   },
-  bookingHref: "#book",
+  bookingHref: "https://forms.gle/oocMwawVB3de6aM29",
   parentSite: "https://www.inajphotography.com/",
 };
 
-export const nav = [
+export const nav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Coaching", href: "/coaching" },
-  { label: "Resources", href: "/resources" },
-  { label: "Testimonials", href: "/testimonials" },
+  { label: "Podcast", href: "/podcast" },
+  {
+    label: "Work With Me",
+    href: "/coaching",
+    children: [
+      { label: "Overview", href: "/coaching" },
+      { label: "Workshop", href: "/workshop" },
+      { label: "Mastermind", href: "/mastermind" },
+    ],
+  },
+  { label: "Results", href: "/results" },
   { label: "Contact", href: "/contact" },
 ];
 
 export const trustStrip = [
-  { label: "Sony Digital Imaging Advocate" },
-  { label: "International Pet Photography Awards · Silver" },
-  { label: "Asia Pacific Photography Awards · Winner" },
-  { label: "Australian Small Business Champions · Winner" },
-  { label: "Local Business Award · Canberra" },
+  { label: "Sony Australia Brand Advocate" },
+  { label: "2023 Australian Small Business Champion Award, Photography" },
+  { label: "$305K+ studio revenue by year six" },
+  { label: "$2,600 to $2,800 average client sale" },
+  { label: "Business Analyst and Project Manager background" },
 ];
 
 export const hero = {
-  eyebrow: "Pet business coaching",
-  primaryHeadline: ["Pet photography", "coaching that", "books itself."],
-  secondaryHeadline: "Marketing & business coaching for pet photographers.",
+  eyebrow: "Ina J Education",
+  primaryHeadline: [
+    "Business coaching",
+    "for pet photographers",
+    "still in the work.",
+  ],
+  secondaryHeadline: "Business coaching for pet photographers.",
   subcopy: "",
-  primaryCta: { label: "Book a Coaching Call", href: site.bookingHref },
-  secondaryCta: { label: "Explore Coaching", href: "/coaching" },
+  primaryCta: { label: "Work with Ina", href: "/coaching" },
+  secondaryCta: { label: "Listen to the podcast", href: "/podcast" },
   credibility:
-    "Built from years photographing pets and growing a trusted photography brand.",
+    "Ina still runs a full-service pet photography business while coaching photographers around the world. The advice is tested inside a real studio, not remembered from one.",
 };
 
 export const problem = {
   eyebrow: "The pattern",
-  headline: "Posting more isn’t the same as having a strategy.",
-  body: "Many photographers are active online but still not getting consistent enquiries because their messaging, offer, website, and client journey are unclear. Talent isn’t the issue. The system behind the talent is.",
+  headline: "A busy business can still feel inconsistent.",
+  body: "Most pet photographers do not need more noise. They need clearer positioning, steadier visibility, and a business structure that helps the right enquiries turn into bookings.",
   points: [
-    "You’re posting but not getting quality enquiries",
-    "Your offers feel unclear or hard to explain",
-    "You’re attracting price shoppers instead of dream clients",
-    "You feel busy but not strategically booked",
-    "You know your work is good, but your marketing does not reflect it",
+    "You are shooting and charging something, but bookings still feel uneven",
+    "Your message does not yet make your value obvious",
+    "Your offers are working too hard to explain themselves",
+    "Your marketing feels reactive instead of intentional",
+    "You want growth that fits your life, not growth that eats it",
   ],
 };
 
 export const pillars = {
   eyebrow: "The approach",
   headline:
-    "Practical coaching from someone who has built the business you’re trying to grow.",
-  body: "Ina is not teaching from theory alone. She has built a pet photography brand around emotional storytelling, client connection, bespoke artwork, and a thoughtful client experience. Now she helps other photographers create clearer marketing and stronger business foundations.",
+    "Practical guidance from a photographer who is still actively building the business.",
+  body: "Ina teaches from the middle of the work. She still photographs clients, still refines her systems, and still pays attention to what actually moves bookings. That is what gives the coaching its edge.",
   items: [
     {
       number: "01",
-      title: "Clear Messaging",
+      title: "Aligned Positioning",
       description:
-        "Get specific about who you serve, what you stand for, and why a client should choose you. No more vague captions or generic offers.",
+        "Clarify who you serve, what you do best, and how to talk about it in a way that feels natural and easy to repeat.",
     },
     {
       number: "02",
-      title: "Intentional Marketing",
+      title: "Magnetic Visibility",
       description:
-        "Replace guesswork with a simple, repeatable marketing plan that attracts enquiries from the right people — even when you’re not posting every day.",
+        "Build a marketing rhythm that helps the right people find you, trust you, and enquire without needing you online all day.",
     },
     {
       number: "03",
-      title: "Better Client Experience",
+      title: "Consistent Bookings",
       description:
-        "Design a client journey from first enquiry to final artwork that builds trust, creates desire, and turns one session into repeat and referred bookings.",
+        "Turn the message, the offer, and the client journey into a system that supports steadier demand and stronger average sales.",
     },
   ],
 };
 
 export const offer = {
-  eyebrow: "The signature program",
-  headline: "Practical coaching for clearer, more consistent bookings.",
-  program: "The Pet Photography Business Coaching Experience",
+  eyebrow: "Work with me",
+  headline: "Choose the support that fits the season you are in.",
+  program: "Workshop, Mastermind, and practical support",
   intro:
-    "A high-impact mentorship to escape the feast-or-famine cycle and build a profitable photography business with absolute focus.",
+    "Whether you need a shorter reset or deeper support, the goal is the same: a business that books more consistently and feels simpler to run.",
   inclusions: [
-    "Brand and offer clarity",
-    "Website and messaging review",
-    "Marketing strategy",
-    "Client journey improvement",
-    "Content direction",
-    "Pricing and positioning guidance",
-    "Action plan for consistent bookings",
+    "Clearer positioning and messaging",
+    "Offer refinement that is easier to sell",
+    "Marketing guidance built around your real calendar",
+    "A more confident client journey",
+    "Practical next steps, not motivational fluff",
   ],
-  cta: { label: "Apply for Coaching", href: "/coaching#apply" },
+  cta: { label: "See the ways to work together", href: "/coaching" },
   guarantee:
-    "Built around the same framework that books Ina’s own calendar month after month.",
+    "Built around the same frameworks Ina is using in her own studio right now.",
 };
 
 export const aboutTeaser = {
-  eyebrow: "Meet your mentor",
-  headline: "Meet Ina",
-  body: "Ina is a Canberra-based pet photographer, dog mum, and business mentor. Her photography brand is built on emotional storytelling, trust, and creating meaningful artwork for pet owners. Her coaching helps photographers bring the same level of clarity and intention into their own business.",
+  eyebrow: "Why Ina",
+  headline: "A coach who is still in the business",
+  body: "Before photography became her full-time work, Ina built a career in the Australian Public Service as a Business Analyst and Project Manager. She now brings that same structure and clear thinking into a pet photography business that grew from $40K in year one to more than $305K in year six.",
   personal:
-    "Her journey started from her love for dogs and the importance of preserving meaningful memories. After losing her heart dog Mac in 2019, she understood how fleeting those moments are — and built a brand around honouring them. That same depth and care now shapes every coaching conversation.",
-  cta: { label: "Get to know Ina", href: "/about" },
+    "The point of difference is simple. Ina is not a former photographer who now coaches. She is a working pet photographer who also coaches, which means the advice stays current, practical, and grounded in what is working now.",
+  cta: { label: "Read Ina's story", href: "/about" },
 };
 
 export const whoFor = {
-  eyebrow: "Is this for you?",
-  headline: "This is for you if you're ready to grow with intention.",
+  eyebrow: "Who this is for",
+  headline: "Support for photographers who are ready for steadier demand.",
   subcopy:
-    "This coaching experience is designed for photographers who want to stop guessing, establish clearer systems, and align their brand with the real value of their work.",
+    "This is designed for pet photographers who already have work in motion and want a clearer path to consistent bookings, better-fit clients, and stronger average sales.",
   yes: [
-    "You are a pet photographer or portrait photographer who wants more consistent bookings",
-    "You feel unsure how to market your services clearly and attract dream clients.",
-    "You want to attract clients who value your creative vision and unique style.",
-    "You want a website and message that feel more professional",
-    "You want practical business guidance from someone who understands photography",
+    "You are already photographing clients and want a business that feels more reliable",
+    "You want sharper messaging and a clearer point of difference",
+    "You need marketing that is repeatable, not improvised every week",
+    "You want pricing and offers that are easier to stand behind",
+    "You value honest advice from someone still doing the work",
   ],
-  no: "This may not be for you if you’re looking for quick hacks, generic templates, or overnight results.",
+  no: "This is not for photographers looking for a magic fix, overnight results, or hype-heavy advice.",
 };
 
 export const outcomes = {
-  eyebrow: "The outcomes",
-  headline: "What you’ll walk away with",
+  eyebrow: "What changes",
+  headline: "What you will leave with",
   items: [
-    "A clearer message that makes your value obvious.",
-    "A stronger offer designed to attract high-value enquiries.",
-    "Confidence in how you market your services.",
-    "A client journey that builds trust and makes booking seamless.",
-    "A simple plan for attracting better-fit clients.",
-    "A website direction that turns visitors into enquiries.",
+    "A clearer message that tells the right people why you matter.",
+    "An offer structure that feels easier to explain and easier to sell.",
+    "A marketing plan you can actually keep up with.",
+    "More confidence in the way you handle enquiries and sales.",
+    "A stronger client journey from first contact to final delivery.",
+    "A more realistic path to consistent bookings.",
   ],
 };
 
@@ -166,79 +181,113 @@ export const testimonials = [
     studio: "Pet Photography Client",
     photo: "/images/testimonials/julia.jpg",
   },
+];
+
+export const clientResults = [
   {
-    headline: "I came away with total clarity.",
-    quote:
-      "I came away knowing exactly what to change on my website and how to talk about my work.",
-    name: "Megan Hartley",
-    studio: "Hartley Pet Portraits",
-    photo:
-      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=400&q=80",
+    name: "Yunet Solorzano",
+    business: "Named client result",
+    figure: "$9,000 sale",
+    summary:
+      "A clearer sales process and stronger positioning helped Yunet move into higher-value work with more confidence.",
   },
   {
-    headline: "Like talking to a mentor who truly gets it.",
-    quote:
-      "It felt like talking to a mentor who actually understands the photography industry.",
-    name: "Priya Anand",
-    studio: "Anand Tails Photography",
-    photo:
-      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=400&q=80",
+    name: "Sharon Canovas",
+    business: "Named client result",
+    figure: "Fully booked spring",
+    summary:
+      "Sharon booked out her spring calendar for the first time after tightening the message and building a more intentional visibility plan.",
   },
   {
-    headline: "Warm, direct, and grounded.",
-    quote:
-      "Ina’s approach is warm, direct, and grounded in real experience — not theory.",
-    name: "Hannah Lee",
-    studio: "Lee & Lens Photography",
-    photo:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80",
+    name: "Stacey Sherman",
+    business: "BarkHop Studio",
+    figure: "Stronger studio direction",
+    summary:
+      "Stacey used the coaching to refine the business direction behind BarkHop Studio and make the next stage of growth feel more sustainable.",
+  },
+];
+
+export const podcastLinks = {
+  apple:
+    "https://podcasts.apple.com/us/podcast/the-pet-photographers-journal/id1821073326",
+  spotify: "https://creators.spotify.com/pod/profile/ina-j-photography/",
+  website: "https://the-pet-photographers-journal.captivate.fm/",
+};
+
+export const podcastEpisodes = [
+  {
+    topic: "Visibility",
+    title:
+      "Third Party Marketing for Pet Photographers, how Kirstie McConnell built a fully booked calendar after relocating",
+    excerpt:
+      "A practical look at what happens when your visibility strategy does not depend on one platform.",
+  },
+  {
+    topic: "Website strategy",
+    title:
+      "SEO, UX, and AI, what pet photographers need to know about their website",
+    excerpt:
+      "A grounded conversation about what your website is signalling to clients before they enquire.",
+  },
+  {
+    topic: "Mindset and pricing",
+    title:
+      "From cheap digitals to profitable artwork, mindset shifts with Michelle Crandall",
+    excerpt:
+      "A useful listen for photographers who know the work is strong but still feel hesitant around value and sales.",
+  },
+  {
+    topic: "Business reality",
+    title:
+      "The truth about what is holding photographers back, and how to build trust in an AI world",
+    excerpt:
+      "An honest episode about the work behind momentum, and what still matters when the market feels noisy.",
   },
 ];
 
 export const leadMagnet = {
   eyebrow: "Free resource",
-  headline: "Start with a clearer photography marketing strategy.",
-  leadTitle: "Download the Pet Photographer’s Marketing Clarity Checklist",
-  body: "A simple guide to help you review your messaging, offers, and client journey so your marketing feels more intentional.",
-  cta: "Send Me the Checklist",
+  headline: "Start with the Consistent Bookings Audit.",
+  leadTitle: "Find the gap in your current booking system",
+  body: "A practical starting point for photographers who want to see where their visibility, positioning, or enquiry process is letting them down.",
+  cta: "Send me the audit",
 };
 
 export const finalCta = {
-  headline:
-    "Ready to build a photography business with more clarity and confidence?",
-  body: "If you’re ready to stop guessing and start making intentional business decisions, book a coaching call with Ina.",
-  cta: { label: "Book a Coaching Call", href: site.bookingHref },
+  headline: "Ready for a clearer path to consistent bookings?",
+  body: "If you want a business that feels warmer, steadier, and easier to run, start with the page that fits where you are now.",
+  cta: { label: "See ways to work with Ina", href: "/coaching" },
 };
 
 export const footer = {
   brand:
-    "Marketing and business coaching for pet photographers — from an award-winning pet photographer and Sony Digital Imaging Advocate.",
+    "Business coaching for pet photographers, from a working photographer building a real studio alongside the education brand.",
   columns: [
     {
-      title: "Coaching",
+      title: "Work With Me",
       links: [
-        { label: "The Program", href: "/coaching" },
-        { label: "Who It’s For", href: "/coaching#who" },
-        { label: "Apply", href: "/coaching#apply" },
-        { label: "Book a Call", href: site.bookingHref },
+        { label: "Overview", href: "/coaching" },
+        { label: "Workshop", href: "/workshop" },
+        { label: "Mastermind", href: "/mastermind" },
+        { label: "Book a call", href: "/contact" },
       ],
     },
     {
-      title: "Learn",
+      title: "Explore",
       links: [
         { label: "About Ina", href: "/about" },
-        { label: "Resources", href: "/resources" },
-        { label: "Testimonials", href: "/testimonials" },
-        { label: "Journal", href: "/resources#journal" },
+        { label: "Podcast", href: "/podcast" },
+        { label: "Results", href: "/results" },
+        { label: "Photography site", href: site.parentSite },
       ],
     },
     {
-      title: "Connect",
+      title: "Future Library",
       links: [
-        { label: "Contact", href: "/contact" },
+        { label: "Free Resources", href: "/resources" },
+        { label: "Blog, coming soon", href: "/resources" },
         { label: "Instagram", href: site.socials.instagram },
         { label: "Facebook", href: site.socials.facebook },
-        { label: "Ina J Photography", href: site.parentSite },
       ],
     },
   ],

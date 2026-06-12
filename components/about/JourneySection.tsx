@@ -49,6 +49,9 @@ export function JourneySection({ phases }: Props) {
         style={{
           paddingTop: "clamp(5rem, 10vw, 8rem)",
           paddingBottom: "clamp(1rem, 2vw, 1.5rem)",
+          transform: "translate3d(0, 0, 0)",
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
         }}
       >
         <div className="grid items-end gap-6 md:grid-cols-12 md:gap-16">
@@ -79,7 +82,7 @@ export function JourneySection({ phases }: Props) {
                 <div className="relative aspect-[16/10] sm:aspect-[4/5] w-full max-h-[65vh] overflow-hidden rounded-2xl bg-cream-deep shadow-[0_15px_50px_-15px_rgba(43,31,23,0.12)]">
                   <AnimatePresence initial={false} mode="sync">
                     <motion.div
-                      key={phases[active].year}
+                      key={phases[active].title}
                       className="absolute inset-0"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -127,12 +130,12 @@ export function JourneySection({ phases }: Props) {
                 <div className="absolute left-[19px] top-0 bottom-0 flex flex-col justify-between items-center">
                   {phases.map((p, idx) => (
                     <motion.div
-                      key={p.year}
+                      key={p.title}
                       className="relative z-10 h-2.5 w-2.5 rounded-full border bg-cream-deep"
                       animate={{
                         borderColor:
-                          idx <= active ? "#CA5F3C" : "var(--color-line)",
-                        backgroundColor: idx <= active ? "#CA5F3C" : "#FFFDFC",
+                          idx <= active ? "#D46858" : "var(--color-line)",
+                        backgroundColor: idx <= active ? "#D46858" : "#FFF8F3",
                         scale: active === idx ? 1.25 : 1,
                       }}
                       transition={{
@@ -145,7 +148,14 @@ export function JourneySection({ phases }: Props) {
               </div>
 
               {/* Right · Content column */}
-              <div className="relative col-span-12 flex min-h-[360px] items-center lg:col-span-1 lg:min-h-[420px]">
+              <div
+                className="relative col-span-12 flex min-h-[360px] items-center lg:col-span-1 lg:min-h-[420px]"
+                style={{
+                  transform: "translate3d(0, 0, 0)",
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
+                }}
+              >
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={active}
@@ -179,7 +189,7 @@ export function JourneySection({ phases }: Props) {
                 <div className="mt-auto pt-8 flex items-center justify-center gap-2 lg:hidden w-full">
                   {phases.map((p, i) => (
                     <span
-                      key={p.year}
+                      key={p.title}
                       className={`h-2 w-2 rounded-full transition-colors duration-300 ${
                         active === i ? "bg-terracotta" : "bg-line"
                       }`}

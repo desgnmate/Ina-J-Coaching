@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Caveat, Fraunces, Inter } from "next/font/google";
+import { Caveat, DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -7,17 +7,19 @@ import { ScrollProgress } from "@/components/shared/ScrollProgress";
 import { ScrollToTop } from "@/components/shared/ScrollToTop";
 import { SmoothScroll } from "@/components/shared/SmoothScroll";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const playfairDisplay = Playfair_Display({
+  variable: "--font-playfair-display",
   subsets: ["latin"],
   display: "swap",
-  axes: ["opsz", "SOFT"],
+  style: ["normal", "italic"],
+  weight: ["400", "500", "600"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
   display: "swap",
+  weight: ["300", "400", "500"],
 });
 
 const caveat = Caveat({
@@ -27,35 +29,35 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://coaching.inajphotography.com"),
+  metadataBase: new URL("https://inajeducation.com"),
   title: {
-    default:
-      "Ina J Coaching — Business & Marketing Coaching for Pet Photographers",
-    template: "%s · Ina J Coaching",
+    default: "Ina J Education — Business Coaching for Pet Photographers",
+    template: "%s · Ina J Education",
   },
   description:
-    "Practical marketing and business coaching for pet photographers who want clearer messaging, intentional marketing, and consistent bookings — from an award-winning pet photographer and Sony Digital Imaging Advocate.",
+    "Business coaching for pet photographers who want clearer positioning, stronger marketing, and more consistent bookings, from a photographer who is still actively in the business.",
   keywords: [
     "pet photography coaching",
     "photography business coach",
     "pet photographer marketing",
-    "photography mentoring",
+    "pet photographer education",
     "Ina J",
   ],
   authors: [{ name: "Ina Jalil" }],
-  creator: "Ina J Photography",
+  creator: "Ina J Education",
   openGraph: {
     type: "website",
     locale: "en_AU",
-    title: "Ina J Coaching — Coaching for Pet Photographers",
+    title: "Ina J Education — Business Coaching for Pet Photographers",
     description:
-      "Marketing and business coaching from an award-winning pet photographer. Build a pet photography business that books consistently.",
-    siteName: "Ina J Coaching",
+      "Business coaching for pet photographers who want a clearer path to steadier bookings and a stronger studio.",
+    siteName: "Ina J Education",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ina J Coaching",
-    description: "Coaching for pet photographers who want consistent bookings.",
+    title: "Ina J Education",
+    description:
+      "Business coaching for pet photographers who want clearer positioning and more consistent bookings.",
   },
   robots: { index: true, follow: true },
 };
@@ -69,7 +71,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fraunces.variable} ${inter.variable} ${caveat.variable} antialiased`}
+      className={`${playfairDisplay.variable} ${dmSans.variable} ${caveat.variable} antialiased`}
     >
       <body
         className="flex min-h-screen flex-col bg-cream text-ink"

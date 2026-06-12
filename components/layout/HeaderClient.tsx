@@ -1,40 +1,36 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-
-type NavLink = { label: string; href: string };
+import type { NavItem } from "@/lib/content";
 
 type Props = {
   bookingHref: string;
-  links: NavLink[];
+  links: NavItem[];
 };
 
 export function HeaderClient({ bookingHref, links }: Props) {
   const pathname = usePathname();
-  const [headerOpacity, setHeaderOpacity] = useState(pathname === "/" ? 0 : 1);
+  const [headerOpacity, setHeaderOpacity] = useState(1);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const isExternalBooking = bookingHref.startsWith("http");
+  const usesDarkHero =
+    pathname.startsWith("/mastermind") || pathname.startsWith("/results");
+  const logoSrc =
+    usesDarkHero && !scrolled
+      ? "/brand/inajeducation-logo-dark.png"
+      : "/brand/inajeducation-logo-light.png";
 
   useEffect(() => {
     const onScroll = () => {
       const scrollY = window.scrollY;
 
       if (pathname === "/") {
-        // Fade in between 50px and 100px of scroll.
-        const startFade = 50;
-        const endFade = 100;
-
-        if (scrollY <= startFade) {
-          setHeaderOpacity(0);
-        } else if (scrollY >= endFade) {
-          setHeaderOpacity(1);
-        } else {
-          const fraction = (scrollY - startFade) / (endFade - startFade);
-          setHeaderOpacity(fraction);
-        }
+        setHeaderOpacity(1);
 
         // Delay background color until the bottom of the viewport enters the next section (with 80px allowance)
         const heroEl = document.getElementById("hero");
@@ -73,34 +69,86 @@ export function HeaderClient({ bookingHref, links }: Props) {
       }`}
     >
       <div className="container-editorial flex h-16 items-center justify-between md:h-20">
-        <Link href="/" className="group flex items-baseline gap-2">
-          <span className="font-display text-xl text-ink md:text-2xl">
-            <span className="italic">Ina J</span>
-            <span className="ml-2 text-[0.7rem] uppercase tracking-[0.22em] text-terracotta">
-              Coaching
-            </span>
-          </span>
+        <Link
+          href="/"
+          aria-label="Ina J Education home"
+          className="relative block h-9 w-[13.5rem] shrink-0 md:h-11 md:w-[16rem]"
+        >
+          <Image
+            src={logoSrc}
+            alt="Ina J Education, pet photography coaching"
+            fill
+            priority
+            sizes="(min-width: 768px) 256px, 216px"
+            className="object-contain object-left"
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="relative text-sm font-medium text-ink-soft transition-colors hover:text-ink"
-            >
-              {l.label}
-            </Link>
-          ))}
+          {links.map((l) =>
+            l.children ? (
+              <div key={l.href} className="group relative">
+                <Link
+                  href={l.href}
+                  className="relative inline-flex items-center gap-1.5 text-sm font-medium text-ink-soft transition-colors hover:text-ink"
+                  aria-haspopup="menu"
+                >
+                  {l.label}
+                  <span
+                    aria-hidden
+                    className="transition-transform duration-300 group-hover:rotate-180"
+                  >
+                    ▾
+                  </span>
+                </Link>
+                <div
+                  role="menu"
+                  className="invisible absolute left-1/2 top-full -translate-x-1/2 pt-3 opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+                >
+                  <div className="min-w-[14rem] rounded-2xl border border-line bg-cream/95 p-2 shadow-[0_18px_40px_-22px_rgba(68,53,61,0.32)] backdrop-blur-md">
+                    {l.children.map((c) => (
+                      <Link
+                        key={c.href}
+                        href={c.href}
+                        role="menuitem"
+                        className="block rounded-xl px-4 py-3 text-sm text-ink-soft transition-colors hover:bg-cream-deep hover:text-ink"
+                      >
+                        {c.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="relative text-sm font-medium text-ink-soft transition-colors hover:text-ink"
+              >
+                {l.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link
-            href={bookingHref}
-            className="btn-primary hidden md:inline-flex"
-          >
-            Book a Coaching Call
-          </Link>
+          {isExternalBooking ? (
+            <a
+              href={bookingHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary hidden md:inline-flex"
+            >
+              Book a Call
+            </a>
+          ) : (
+            <Link
+              href={bookingHref}
+              className="btn-primary hidden md:inline-flex"
+            >
+              Book a Call
+            </Link>
+          )}
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -150,21 +198,48 @@ export function HeaderClient({ bookingHref, links }: Props) {
                       className="flex items-center justify-between py-4 font-display text-2xl text-ink"
                     >
                       {l.label}
-                      <span aria-hidden className="text-terracotta">
+                      <span aria-hidden className="text-gold">
                         →
                       </span>
                     </Link>
+                    {l.children && (
+                      <ul className="pb-4 pl-2">
+                        {l.children.map((c) => (
+                          <li key={c.href}>
+                            <Link
+                              href={c.href}
+                              onClick={() => setOpen(false)}
+                              className="block py-2 text-base text-ink-soft"
+                            >
+                              {c.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </li>
                 ))}
               </ul>
               <div className="mt-6 flex flex-col gap-3">
-                <Link
-                  href={bookingHref}
-                  onClick={() => setOpen(false)}
-                  className="btn-primary w-full"
-                >
-                  Book a Coaching Call
-                </Link>
+                {isExternalBooking ? (
+                  <a
+                    href={bookingHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setOpen(false)}
+                    className="btn-primary w-full"
+                  >
+                    Book a Call
+                  </a>
+                ) : (
+                  <Link
+                    href={bookingHref}
+                    onClick={() => setOpen(false)}
+                    className="btn-primary w-full"
+                  >
+                    Book a Call
+                  </Link>
+                )}
                 <Link
                   href={siteParentHref()}
                   onClick={() => setOpen(false)}
