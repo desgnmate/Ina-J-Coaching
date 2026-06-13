@@ -1,10 +1,11 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { createClient } from "@sanity/client";
+import { sanityDataset, sanityProjectId } from "../../lib/sanity-env";
 
 const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+  projectId: sanityProjectId,
+  dataset: sanityDataset,
   apiVersion: "2025-01-01",
   token: process.env.SANITY_API_READ_TOKEN,
 });

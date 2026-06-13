@@ -1,20 +1,18 @@
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
-
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
+import { sanityDataset, sanityProjectId } from "./sanity-env";
 
 export const client = createClient({
-  projectId,
-  dataset,
+  projectId: sanityProjectId,
+  dataset: sanityDataset,
   apiVersion: "2025-01-01",
   useCdn: true,
 });
 
 export const previewClient = createClient({
-  projectId,
-  dataset,
+  projectId: sanityProjectId,
+  dataset: sanityDataset,
   apiVersion: "2025-01-01",
   useCdn: false,
 });
