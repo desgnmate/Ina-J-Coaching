@@ -42,8 +42,20 @@ next-env.d.ts
 
 # agent metadata and logs
 .antigravitycli/
+.commandcode/
 .hermes/
 plan.md
 dev-server.log
 backups/
 
+# local development captures and scratch files
+/admin*.html
+/dev*.log
+/dev-preview.err
+/fix-next.js
+/page-full.png
+/docs/compose/
+
+# local client source material
+/Client changes/
+/ina j/

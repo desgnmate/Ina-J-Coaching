@@ -24,12 +24,12 @@ export const images = {
     alt: "Cute pug posing in Canberra park - Ina J Photography",
   },
   cta: {
-    src: "/images/home/cta-new.png",
-    alt: "Black and white puppy under pink blossoms",
+    src: "/images/home/cta-main.png",
+    alt: "Main CTA background image",
   },
   podcastHero: {
-    src: "/images/home/hero-three-dogs.jpg",
-    alt: "Three dogs together in a pet photography portrait",
+    src: "/images/home/podcast-cover.jpg",
+    alt: "The Pet Photographers' Journal Cover Art",
   },
   coachingFeature: {
     src: "https://image12.photobiz.com/7732/7_20230217021530_12724977_xlarge.jpg",
@@ -44,7 +44,7 @@ export const images = {
     alt: "Pug portrait outdoors",
   },
   finalCta: {
-    src: "/images/home/cta-new.png",
-    alt: "Black and white puppy under pink blossoms",
+    src: "/images/home/cta-main.png",
+    alt: "Main CTA background image",
   },
 };

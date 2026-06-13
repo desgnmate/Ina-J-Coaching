@@ -97,19 +97,19 @@ export default function CoachingPage() {
             </div>
 
             {/* Right Column - Editorial Dual-Card Visual */}
-            <div className="lg:col-span-6 relative flex flex-col md:flex-row gap-6">
+            <div className="lg:col-span-6 relative flex flex-col md:flex-row gap-5">
               {/* Card 1: Workshop */}
               <Reveal from="up" className="flex-1">
-                <div className="group relative rounded-[2rem] border border-line bg-cream p-8 shadow-[0_15px_40px_-20px_rgba(68,53,61,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-terracotta/30">
+                <div className="group relative h-full rounded-[2rem] border border-line bg-cream p-7 shadow-[0_12px_35px_-18px_rgba(68,53,61,0.12)] transition-all duration-300 hover:-translate-y-1 hover:border-terracotta/25 hover:shadow-[0_18px_45px_-20px_rgba(68,53,61,0.18)]">
                   <span className="text-[0.65rem] font-bold tracking-[0.2em] text-gold uppercase">
                     01 / Curated Reset
                   </span>
-                  <h3 className="font-display text-2xl text-ink mt-3">
+                  <h3 className="font-display text-xl text-ink mt-3 leading-snug">
                     The Workshop
                   </h3>
-                  <p className="mt-3 text-sm text-ink-soft leading-relaxed">
-                    Build a clearer foundation, audit your visibility channel,
-                    and exit with a 90-day plan you'll actually implement.
+                  <p className="mt-3 text-sm text-ink-soft leading-relaxed line-clamp-3">
+                    Build a clearer foundation and audit your visibility. Exit
+                    with a 90-day plan you'll actually implement.
                   </p>
                   <div className="mt-6">
                     <Button
@@ -125,14 +125,14 @@ export default function CoachingPage() {
 
               {/* Card 2: Mastermind */}
               <Reveal from="up" delay={0.1} className="flex-1">
-                <div className="group relative rounded-[2rem] border border-line bg-ink p-8 text-cream shadow-[0_15px_40px_-20px_rgba(68,53,61,0.3)] transition-all duration-300 hover:-translate-y-1 hover:border-gold/30">
+                <div className="group relative h-full rounded-[2rem] border border-cream/10 bg-ink p-7 text-cream shadow-[0_12px_35px_-18px_rgba(68,53,61,0.25)] transition-all duration-300 hover:-translate-y-1 hover:border-gold/25 hover:shadow-[0_18px_45px_-20px_rgba(68,53,61,0.35)]">
                   <span className="text-[0.65rem] font-bold tracking-[0.2em] text-terracotta-soft uppercase">
                     02 / Deep Container
                   </span>
-                  <h3 className="font-display text-2xl text-cream mt-3">
+                  <h3 className="font-display text-xl text-cream mt-3 leading-snug">
                     The Mastermind
                   </h3>
-                  <p className="mt-3 text-sm text-cream/70 leading-relaxed">
+                  <p className="mt-3 text-sm text-cream/70 leading-relaxed line-clamp-3">
                     A high-touch mentorship container for photographers ready to
                     optimize pricing, convert enquiries, and scale.
                   </p>
@@ -290,7 +290,7 @@ export default function CoachingPage() {
               <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-cream/55">
                 {stats[0].label}
               </p>
-              <p className="mt-6 font-display text-[3.6rem] leading-none text-cream md:text-[4.4rem]">
+              <p className="mt-6 font-sans font-light text-[3.6rem] leading-none text-cream md:text-[4.4rem]">
                 {stats[0].figure}
               </p>
               <p className="mt-4 max-w-xs text-sm leading-relaxed text-cream/70">
@@ -306,7 +306,7 @@ export default function CoachingPage() {
                       <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-cream/55">
                         {stat.label}
                       </p>
-                      <p className="mt-5 font-display text-[2.6rem] leading-none text-cream md:text-[3rem]">
+                      <p className="mt-5 font-sans font-light text-[2.6rem] leading-none text-cream md:text-[3rem]">
                         {stat.figure}
                       </p>
                     </div>

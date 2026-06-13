@@ -116,66 +116,71 @@ export default function WorkshopPage() {
 
             {/* Right Interactive Schedule Column */}
             <div className="lg:col-span-6">
-              <div className="relative overflow-hidden rounded-[2rem] border border-line bg-cream shadow-[0_22px_50px_-25px_rgba(68,53,61,0.18)]">
-                <div className="border-b border-line bg-cream-warm/40 px-8 py-6">
-                  <div className="flex flex-wrap items-end justify-between gap-6">
-                    <div>
-                      <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-terracotta">
-                        Upcoming syllabus
-                      </p>
-                      <h3 className="mt-3 font-display text-2xl text-ink">
-                        Three live sessions with a clear 90-day outcome.
-                      </h3>
-                    </div>
-                    <div className="grid gap-3 text-right sm:grid-cols-3 sm:text-left">
-                      <div>
-                        <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-gold">
-                          Format
-                        </p>
-                        <p className="mt-2 text-sm text-ink">3 live sessions</p>
-                      </div>
-                      <div>
-                        <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-gold">
-                          Delivery
-                        </p>
-                        <p className="mt-2 text-sm text-ink">Live online</p>
-                      </div>
-                      <div>
-                        <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-gold">
-                          Investment
-                        </p>
-                        <p className="mt-2 text-sm text-ink">
-                          $790 AUD / $559 USD
-                        </p>
-                      </div>
+              <div className="relative overflow-hidden rounded-[2.5rem] bg-ink bg-grain border border-cream/8 shadow-[0_30px_60px_-20px_rgba(68,53,61,0.25)]">
+                {/* Header */}
+                <div className="px-8 pt-8 pb-6">
+                  <div className="flex items-center gap-3 mb-5">
+                    <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-terracotta-soft">
+                      Upcoming syllabus
+                    </span>
+                    <span className="h-px flex-1 bg-cream/10" />
+                    <span className="text-[0.6rem] uppercase tracking-[0.15em] text-cream/40">
+                      3 sessions
+                    </span>
+                  </div>
+                  <h3 className="font-display text-[1.5rem] text-cream leading-snug max-w-md">
+                    Three live sessions with a clear 90-day outcome.
+                  </h3>
+                  <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+                    <span className="text-xs text-cream/50">
+                      <span className="text-cream/30">Format</span>{" "}
+                      <span className="text-cream/70">Live online</span>
+                    </span>
+                    <span className="text-xs text-cream/50">
+                      <span className="text-cream/30">Investment</span>{" "}
+                      <span className="text-cream/70">$790 AUD / $559 USD</span>
+                    </span>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="mx-8 h-px bg-cream/8" />
+
+                {/* Module List - Timeline Style */}
+                <div className="px-8 py-6">
+                  <div className="relative">
+                    {/* Vertical timeline line */}
+                    <div className="absolute left-4 top-3 bottom-3 w-px bg-cream/8" />
+
+                    <div className="space-y-6">
+                      {modules.map((m, i) => (
+                        <div
+                          key={m.title}
+                          className="relative flex gap-4 group"
+                        >
+                          {/* Number dot */}
+                          <div className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-terracotta text-xs font-medium text-cream transition-colors group-hover:bg-terracotta-deep">
+                            {m.number}
+                          </div>
+                          <div className="pt-0.5">
+                            <h4 className="font-display text-[0.95rem] font-medium text-cream/90 transition-colors group-hover:text-cream">
+                              {m.title}
+                            </h4>
+                            <p className="mt-1.5 text-[0.8rem] leading-relaxed text-cream/45 max-w-sm">
+                              {m.body}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
-                <div className="p-8">
-                  <div className="space-y-5">
-                    {modules.map((m) => (
-                      <div
-                        key={m.title}
-                        className="grid gap-4 rounded-[1.5rem] border border-line/70 bg-cream-warm/20 p-5 md:grid-cols-[auto_1fr]"
-                      >
-                        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-sm font-semibold text-terracotta font-display shadow-sm">
-                          {m.number}
-                        </span>
-                        <div>
-                          <h4 className="font-display text-lg font-medium text-ink">
-                            {m.title}
-                          </h4>
-                          <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-                            {m.body}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-6 flex items-center justify-between border-t border-line pt-5 text-xs text-ink-muted">
-                    <span>Includes session replays</span>
-                    <span>Built for a practical 90-day plan</span>
-                  </div>
+
+                {/* Footer */}
+                <div className="mx-8 h-px bg-cream/8" />
+                <div className="px-8 py-4 flex items-center justify-between text-[0.65rem] text-cream/35 uppercase tracking-[0.12em]">
+                  <span>Includes session replays</span>
+                  <span>Built for a practical 90-day plan</span>
                 </div>
               </div>
             </div>

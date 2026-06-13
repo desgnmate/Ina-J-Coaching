@@ -3,12 +3,42 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/shared/Button";
-import { CountUp } from "@/components/shared/CountUp";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { StickyCta } from "@/components/shared/StickyCta";
 import { site } from "@/lib/content";
 import { images } from "@/lib/images";
+
+const recognition = [
+  {
+    src: "https://image12.photobiz.com/7732/7_20241003235111_13761207_large.png",
+    alt: "Sony Digital Imaging Advocate",
+  },
+  {
+    src: "https://image11.photobiz.com/8586/7_20241219161945_13951845_large.png",
+    alt: "2024 International Pet Photography Awards - Silver Winner",
+  },
+  {
+    src: "https://image6.photobiz.com/8933/7_20241219162120_13951847_large.png",
+    alt: "2024 International Pet Photography Awards - Bronze Distinction Winner",
+  },
+  {
+    src: "https://image10.photobiz.com/8495/7_20241219162119_13951846_large.png",
+    alt: "2024 International Pet Photography Awards - Bronze Winner",
+  },
+  {
+    src: "https://image4.photobiz.com/8911/7_20250210174632_14017005_large.png",
+    alt: "AI Photo Editing Partnership with Imagen",
+  },
+  {
+    src: "https://image6.photobiz.com/8933/7_20230214064819_12722126_large.png",
+    alt: "2022 Asia Pacific Photography Awards People's Choice Winner",
+  },
+  {
+    src: "https://image7.photobiz.com/8912/7_20230214064819_12722127_large.png",
+    alt: "2022 Asia Pacific Photography Awards Finalist",
+  },
+];
 
 const resultsData = [
   {
@@ -140,50 +170,59 @@ export default function ResultsPage() {
         </div>
       </section>
 
-      {/* ── 2 · Metrics count-up section ── */}
-      <section className="border-b border-line bg-cream section-tight">
-        <div className="container-editorial">
-          <div className="grid gap-4 md:grid-cols-[1.15fr_1fr_1fr]">
-            <div className="rounded-[1.9rem] border border-line bg-cream-warm/70 px-8 py-8 text-left">
-              <Reveal from="up">
-                <span className="text-[0.65rem] font-bold tracking-[0.2em] text-ink-muted uppercase">
-                  Studio Revenue
+      {/* ── 2 · Recognition · Light section ── */}
+      <section className="bg-grid bg-noise-cream section relative overflow-hidden">
+        <div className="container-editorial relative">
+          {/* Header · two-column */}
+          <div className="grid items-end gap-10 md:grid-cols-12 md:gap-16">
+            <div className="md:col-span-7">
+              <p className="text-terracotta text-[0.75rem] font-medium uppercase tracking-[0.18em]">
+                Recognition
+              </p>
+              <h2 className="display-2 mt-5 text-balance text-ink">
+                Trusted by clients,{" "}
+                <span className="italic text-terracotta">
+                  recognised by the industry.
                 </span>
-                <p className="mt-3 font-display text-4xl text-ink md:text-5xl">
-                  <CountUp to={305} prefix="$" suffix="K+" />
-                </p>
-                <p className="mt-2 text-xs text-ink-soft">
-                  By year six of operation
-                </p>
-              </Reveal>
+              </h2>
             </div>
-            <div className="rounded-[1.9rem] border border-line bg-white/55 px-8 py-8 text-left">
-              <Reveal from="up" delay={0.08}>
-                <span className="text-[0.65rem] font-bold tracking-[0.2em] text-ink-muted uppercase">
-                  Average Sale
-                </span>
-                <p className="mt-3 font-display text-4xl text-ink md:text-5xl">
-                  <CountUp to={2600} prefix="$" suffix="–$2800" />
-                </p>
-                <p className="mt-2 text-xs text-ink-soft">
-                  Per individual client booking
-                </p>
-              </Reveal>
-            </div>
-            <div className="rounded-[1.9rem] border border-terracotta/18 bg-gradient-to-br from-terracotta/10 to-transparent px-8 py-8 text-left">
-              <Reveal from="up" delay={0.16}>
-                <span className="text-[0.65rem] font-bold tracking-[0.2em] text-ink-muted uppercase">
-                  Recognition
-                </span>
-                <p className="mt-3 font-display text-4xl text-ink md:text-5xl">
-                  Sony
-                </p>
-                <p className="mt-2 text-xs text-ink-soft">
-                  Digital Imaging Advocate
-                </p>
-              </Reveal>
-            </div>
+            <Reveal className="md:col-span-5">
+              <p className="body-lg max-w-md md:ml-auto text-ink-soft">
+                A handful of the awards, partnerships, and recognitions that
+                have shaped the studio and the coaching practice.
+              </p>
+            </Reveal>
           </div>
+
+          {/* Awards grid */}
+          <Reveal>
+            <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 lg:grid-cols-5">
+              {recognition.map((r, i) => (
+                <div
+                  key={r.alt}
+                  className="group relative flex h-32 items-center justify-center rounded-2xl border border-line bg-cream p-5 shadow-sm transition-all duration-300 hover:scale-[1.03] hover:border-terracotta/20 hover:bg-cream-warm/40 hover:shadow-[0_8px_24px_rgba(68,53,61,0.08)]"
+                >
+                  {/* biome-ignore lint/performance/noImgElement: using standard img to render live website assets */}
+                  <img
+                    src={r.src}
+                    alt={r.alt}
+                    className={`max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105 ${i === 0 ? "brightness-0 opacity-80" : ""}`}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal className="mt-10 flex justify-center">
+            <a
+              href={site.parentSite}
+              className="btn-ghost text-ink-muted hover:text-ink"
+            >
+              See the photography portfolio
+              <span aria-hidden>→</span>
+            </a>
+          </Reveal>
         </div>
       </section>
 
@@ -214,7 +253,7 @@ export default function ResultsPage() {
                   className={`rounded-full px-5 py-2 text-xs font-medium tracking-[0.02em] transition-all cursor-pointer ${
                     filter === f
                       ? "bg-ink text-cream shadow-sm"
-                      : "bg-cream border border-line text-ink-soft hover:bg-cream-warm/40"
+                      : "bg-cream border border-line text-ink-soft hover:bg-ink hover:text-cream"
                   }`}
                 >
                   {f}

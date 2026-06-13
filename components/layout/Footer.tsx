@@ -7,7 +7,7 @@ export function Footer() {
     <footer className="mt-auto bg-ink text-cream">
       <div className="container-editorial py-20">
         <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-5">
+          <div className="md:col-span-4">
             <Link
               href="/"
               aria-label="Ina J Education home"
@@ -88,8 +88,8 @@ export function Footer() {
             </div>
           ))}
 
-          <div className="md:col-span-1">
-            <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-terracotta-soft">
+          <div className="md:col-span-2">
+            <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-terracotta-soft whitespace-nowrap">
               Reach out
             </h3>
             <ul className="mt-5 space-y-3 text-sm text-cream/75">

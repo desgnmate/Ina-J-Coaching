@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Caveat, DM_Sans, Playfair_Display } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -62,11 +63,15 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") || "";
+  const isAdmin = pathname.startsWith("/admin");
+
   return (
     <html
       lang="en"
@@ -74,23 +79,25 @@ export default function RootLayout({
       className={`${playfairDisplay.variable} ${dmSans.variable} ${caveat.variable} antialiased`}
     >
       <body
-        className="flex min-h-screen flex-col bg-cream text-ink"
+        className={`flex min-h-screen flex-col bg-cream text-ink ${isAdmin ? "overflow-hidden" : ""}`}
         suppressHydrationWarning
       >
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-terracotta focus:px-5 focus:py-2 focus:text-cream"
-        >
-          Skip to content
-        </a>
-        <ScrollProgress />
-        <ScrollToTop />
+        {!isAdmin && (
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-terracotta focus:px-5 focus:py-2 focus:text-cream"
+          >
+            Skip to content
+          </a>
+        )}
+        {!isAdmin && <ScrollProgress />}
+        {!isAdmin && <ScrollToTop />}
         <SmoothScroll>
-          <Header />
+          {!isAdmin && <Header />}
           <main id="main" className="flex-1">
             {children}
           </main>
-          <Footer />
+          {!isAdmin && <Footer />}
         </SmoothScroll>
       </body>
     </html>

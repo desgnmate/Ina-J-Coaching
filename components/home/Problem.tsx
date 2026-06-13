@@ -305,8 +305,8 @@ export function Problem() {
                     onBlur={() => setHovered(null)}
                     className={`group relative z-10 flex min-h-[116px] w-full flex-col items-center justify-center overflow-hidden rounded-[24px] border px-5 py-5 text-center transition-all duration-[900ms] md:min-h-[126px] md:px-6 md:py-5 ${
                       isActive
-                        ? "-translate-y-1 scale-[1.02] border-terracotta/20 bg-[#FFF8F3]"
-                        : "border-line bg-[#EFDFD6] hover:border-line/80"
+                        ? "-translate-y-1 scale-[1.02] border-line bg-[#FFF8F3] shadow-[0_0_0_1px_rgba(212,104,88,0.12),0_12px_30px_rgba(68,53,61,0.08)]"
+                        : "border-line bg-[#EFDFD6] shadow-[0_10px_24px_-22px_rgba(68,53,61,0.08)]"
                     }`}
                     style={{ backdropFilter: "blur(18px)" }}
                   >

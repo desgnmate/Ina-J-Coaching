@@ -216,32 +216,56 @@ export const podcastLinks = {
 
 export const podcastEpisodes = [
   {
+    number: "024",
+    topic: "Business Reality",
+    title: "One Year In and the 4 Bottlenecks Keeping Pet Photographers Stuck",
+    excerpt:
+      "Celebrating one year of the podcast by looking at the four primary bottlenecks that keep studios stuck: from visibility to pricing and operational capacity.",
+    date: "10 June 2026",
+    embedId: "133eed7d-785a-4b25-ac4f-8769bccd2dad",
+    duration: "45 min",
+  },
+  {
+    number: "023",
     topic: "Visibility",
     title:
-      "Third Party Marketing for Pet Photographers, how Kirstie McConnell built a fully booked calendar after relocating",
+      "Third Party Marketing for Pet Photographers: How Kirstie McConnell built a fully booked calendar after relocating",
     excerpt:
-      "A practical look at what happens when your visibility strategy does not depend on one platform.",
+      "How Kirstie built a fully booked calendar after relocating her photography business, leveraging relationships instead of paid ads.",
+    date: "3 June 2026",
+    embedId: "4b76f02b-345b-46b3-b5c3-be51f119f409",
+    duration: "41 min",
   },
   {
-    topic: "Website strategy",
-    title:
-      "SEO, UX, and AI, what pet photographers need to know about their website",
+    number: "022",
+    topic: "Visibility",
+    title: "The Facebook Ad and Giveaway System for Pet Photographers",
     excerpt:
-      "A grounded conversation about what your website is signalling to clients before they enquire.",
+      "A detailed breakdown of how to build and run a high-converting Facebook Ad and giveaway funnel that attracts active enquiries.",
+    date: "19 May 2026",
+    embedId: "15e789ac-42f0-4ba2-8059-4a9cddb2eb3e",
+    duration: "35 min",
   },
   {
-    topic: "Mindset and pricing",
+    number: "021",
+    topic: "Visibility",
     title:
-      "From cheap digitals to profitable artwork, mindset shifts with Michelle Crandall",
+      "How to Keep Marketing When You're Too Busy in Your Photography Business",
     excerpt:
-      "A useful listen for photographers who know the work is strong but still feel hesitant around value and sales.",
+      "Practical marketing routines to keep your enquiry pipeline warm even when you are fully booked and busy with client shoots.",
+    date: "11 May 2026",
+    embedId: "2be6faac-9f4f-47e7-9ca6-c88dd7640eaa",
+    duration: "38 min",
   },
   {
-    topic: "Business reality",
-    title:
-      "The truth about what is holding photographers back, and how to build trust in an AI world",
+    number: "020",
+    topic: "Pricing",
+    title: "Your Next Busy Season Is Being Decided Right Now",
     excerpt:
-      "An honest episode about the work behind momentum, and what still matters when the market feels noisy.",
+      "Why the actions you take today determine your bookings and revenue three months from now, and how to plan ahead.",
+    date: "3 May 2026",
+    embedId: "80dc66a6-178e-4957-858f-f811f1b883c2",
+    duration: "40 min",
   },
 ];
 

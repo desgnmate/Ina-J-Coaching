@@ -214,7 +214,7 @@ export default function MastermindPage() {
                 className={`rounded-full px-5 py-2.5 text-sm font-medium tracking-[0.02em] transition-all cursor-pointer ${
                   activeTab === tab.id
                     ? "bg-ink text-cream shadow-sm"
-                    : "bg-cream border border-line text-ink-soft hover:bg-cream-warm/40"
+                    : "bg-cream border border-line text-ink-soft hover:bg-ink hover:text-cream"
                 }`}
               >
                 {tab.label}

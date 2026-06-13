@@ -95,7 +95,11 @@ export function HeaderClient({ bookingHref, links }: Props) {
               <div key={l.href} className="group relative">
                 <Link
                   href={l.href}
-                  className="relative inline-flex items-center gap-1.5 text-sm font-medium text-ink-soft transition-colors hover:text-ink"
+                  className={`relative inline-flex items-center gap-1.5 text-sm font-medium transition-colors ${
+                    usesDarkHero && !scrolled
+                      ? "text-cream/70 hover:text-cream"
+                      : "text-ink-soft hover:text-ink"
+                  }`}
                   aria-haspopup="menu"
                 >
                   {l.label}
@@ -128,7 +132,11 @@ export function HeaderClient({ bookingHref, links }: Props) {
               <Link
                 key={l.href}
                 href={l.href}
-                className="relative text-sm font-medium text-ink-soft transition-colors hover:text-ink"
+                className={`relative text-sm font-medium transition-colors ${
+                  usesDarkHero && !scrolled
+                    ? "text-cream/70 hover:text-cream"
+                    : "text-ink-soft hover:text-ink"
+                }`}
               >
                 {l.label}
               </Link>
@@ -159,7 +167,11 @@ export function HeaderClient({ bookingHref, links }: Props) {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="grid h-10 w-10 place-items-center rounded-full border border-line text-ink transition-colors hover:border-ink lg:hidden"
+            className={`grid h-10 w-10 place-items-center rounded-full border transition-colors lg:hidden ${
+              usesDarkHero && !scrolled
+                ? "border-cream/30 text-cream hover:border-cream"
+                : "border-line text-ink hover:border-ink"
+            }`}
           >
             <span className="sr-only">Menu</span>
             <span aria-hidden className="relative block h-3 w-5">
