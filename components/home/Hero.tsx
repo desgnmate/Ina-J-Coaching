@@ -15,6 +15,7 @@ import { OrganicShape } from "@/components/shared/OrganicShape";
 import { hero } from "@/lib/content";
 
 const HERO_VIDEO_SRC = "/video/hero%20video.mp4";
+const HERO_VIDEO_POSTER = "/video/video-poster.png";
 
 const COLLAGE_IMAGES = [
   {
@@ -117,6 +118,11 @@ export function Hero() {
   const [browserMutedFallback, setBrowserMutedFallback] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [videoMinimized, setVideoMinimized] = useState(false);
+  // Tracks whether the hero video is actually playing. Drives the poster
+  // overlay opacity so the poster stays visible until the first frame
+  // renders, then fades out seamlessly — making the video look like it's
+  // resuming from pause.
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   // Browser autoplay policy requires a user gesture before unmuted playback.
   // We auto-play muted, then show a one-time prompt asking the user to enable sound.
   // Once dismissed (or unmuted), we never show it again for this page-load.
@@ -338,6 +344,22 @@ export function Hero() {
     return () => observer.disconnect();
   }, []);
 
+  // Notify the header of the initial hero opacity on mount.
+  // useMotionValueEvent("change", ...) does NOT fire for the initial value, so
+  // without this the header would stay at its default opacity (1) on first paint
+  // and only sync up after the first scroll. On the homepage the header should
+  // start hidden (opacity 0) and fade in as the user scrolls past the hero.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: intentionally fires once on mount; subsequent updates flow through useMotionValueEvent.
+  useEffect(() => {
+    const p = Math.max(0, Math.min(1, scrollYProgress.get()));
+    const opacity = Math.max(0, Math.min(1, (p - 0.45) / (0.75 - 0.45)));
+    window.dispatchEvent(
+      new CustomEvent("hero-content-opacity", {
+        detail: { opacity },
+      }),
+    );
+  }, []);
+
   // Manage video play/pause based on visibility state
   // biome-ignore lint/correctness/useExhaustiveDependencies: getActiveVideo depends on isMobile state.
   useEffect(() => {
@@ -388,8 +410,6 @@ export function Hero() {
   }, [isMobile]);
 
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
-    if (isMobile || !coords) return;
-
     const interpolate = (
       p: number,
       start: number,
@@ -405,6 +425,18 @@ export function Hero() {
 
     const p = Math.max(0, Math.min(1, progress));
     setVideoMinimized(p > 0.45);
+
+    // Notify header of content opacity for synchronized fade-in.
+    // Dispatched unconditionally (mobile or no coords yet) so the header gets
+    // the right opacity from the first scroll change, not just after coords
+    // are measured.
+    window.dispatchEvent(
+      new CustomEvent("hero-content-opacity", {
+        detail: { opacity: interpolate(p, 0.45, 0.75, 0, 1) },
+      }),
+    );
+
+    if (isMobile || !coords) return;
 
     animWidth.set(
       interpolate(p, 0, 0.45, coords.centered.width, coords.settled.width),
@@ -428,13 +460,6 @@ export function Hero() {
     contentOpacity.set(interpolate(p, 0.45, 0.75, 0, 1));
     collageOpacity.set(interpolate(p, 0.55, 0.85, 0, 1));
     collageY.set(interpolate(p, 0.55, 0.85, 40, 0));
-
-    // Notify header of content opacity for synchronized fade-in
-    window.dispatchEvent(
-      new CustomEvent("hero-content-opacity", {
-        detail: { opacity: interpolate(p, 0.45, 0.75, 0, 1) },
-      }),
-    );
 
     const volumeFactor = clamp(interpolate(p, 0, 0.45, 1, 0), 0, 1);
     const video = getActiveVideo();
@@ -714,10 +739,25 @@ export function Hero() {
                       loop
                       playsInline
                       preload="metadata"
+                      poster={HERO_VIDEO_POSTER}
                       disablePictureInPicture
                       controlsList="nodownload nofullscreen noremoteplayback"
                       className="cinematic-video absolute inset-0 h-full w-full object-cover scale-[1.15]"
                       src={HERO_VIDEO_SRC}
+                      onPlaying={() => setIsVideoPlaying(true)}
+                      onPause={() => setIsVideoPlaying(false)}
+                      onEnded={() => setIsVideoPlaying(false)}
+                    />
+                    <Image
+                      src={HERO_VIDEO_POSTER}
+                      alt=""
+                      aria-hidden
+                      fill
+                      priority
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className={`object-cover scale-[1.15] pointer-events-none select-none transition-opacity duration-700 ease-out ${
+                        isVideoPlaying ? "opacity-0" : "opacity-100"
+                      }`}
                     />
                     <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.14)_0%,rgba(0,0,0,0.22)_58%,rgba(0,0,0,0.34)_100%)]" />
 
@@ -842,10 +882,25 @@ export function Hero() {
                 loop
                 playsInline
                 preload="metadata"
+                poster={HERO_VIDEO_POSTER}
                 disablePictureInPicture
                 controlsList="nodownload nofullscreen noremoteplayback"
                 className="cinematic-video absolute inset-0 h-full w-full object-cover scale-[1.15]"
                 src={HERO_VIDEO_SRC}
+                onPlaying={() => setIsVideoPlaying(true)}
+                onPause={() => setIsVideoPlaying(false)}
+                onEnded={() => setIsVideoPlaying(false)}
+              />
+              <Image
+                src={HERO_VIDEO_POSTER}
+                alt=""
+                aria-hidden
+                fill
+                priority
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className={`object-cover scale-[1.15] pointer-events-none select-none transition-opacity duration-700 ease-out ${
+                  isVideoPlaying ? "opacity-0" : "opacity-100"
+                }`}
               />
               <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.14)_0%,rgba(0,0,0,0.22)_58%,rgba(0,0,0,0.34)_100%)]" />
 

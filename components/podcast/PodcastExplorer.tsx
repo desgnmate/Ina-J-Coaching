@@ -1,5 +1,6 @@
 "use client";
 
+import { ApplePodcastsLogoIcon, SpotifyLogoIcon } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -137,14 +138,11 @@ export default function PodcastExplorer() {
                     variant="primary"
                     className="flex items-center gap-2"
                   >
-                    <svg
-                      className="w-5 h-5 fill-current"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <title>Apple Podcasts Icon</title>
-                      <path d="M12 2C6.48 2 2 6.48 2 12c0 4.29 2.7 7.95 6.48 9.32.4-.1.8-.25 1.19-.45v-1.78c-2.48-.96-4.22-3.37-4.22-6.19 0-3.67 2.97-6.66 6.6-6.66s6.6 2.99 6.6 6.66c0 2.82-1.74 5.23-4.22 6.19v1.78c.39.2.79.35 1.19.45C19.3 19.95 22 16.29 22 12c0-5.52-4.48-10-10-10zm0 7.55c-2.44 0-4.43 2-4.43 4.45 0 2.45 2 4.45 4.43 4.45s4.43-2 4.43-4.45c0-2.45-2-4.45-4.43-4.45zm0 2.45c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 1c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z" />
-                    </svg>
+                    <ApplePodcastsLogoIcon
+                      className="w-5 h-5"
+                      weight="fill"
+                      aria-hidden
+                    />
                     Apple Podcasts
                   </Button>
                   <Button
@@ -153,14 +151,11 @@ export default function PodcastExplorer() {
                     variant="secondary"
                     className="flex items-center gap-2"
                   >
-                    <svg
-                      className="w-5 h-5 fill-current"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <title>Spotify Icon</title>
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.58 14.42c-.2.32-.62.42-.94.22-2.58-1.58-5.83-1.94-9.66-1.07-.36.08-.72-.14-.8-.5-.08-.36.14-.72.5-.8 4.19-.96 7.78-.54 10.68 1.23.32.2.42.62.22.94zm1.22-2.73c-.26.4-.78.53-1.18.27-2.95-1.81-7.46-2.34-10.96-1.28-.45.14-.92-.12-1.05-.57-.14-.45.12-.92.57-1.05 4-1.21 8.97-.62 12.35 1.45.4.26.53.78.27 1.18zm.1-2.81C14.52 8.78 8.87 8.59 5.6 9.58c-.62.19-1.28-.16-1.47-.78-.19-.62.16-1.28.78-1.47 3.75-1.14 9.98-.92 14.9 2.01.56.33.74 1.05.41 1.61-.33.56-1.05.74-1.61.41z" />
-                    </svg>
+                    <SpotifyLogoIcon
+                      className="w-5 h-5"
+                      weight="fill"
+                      aria-hidden
+                    />
                     Spotify
                   </Button>
                   <Button

@@ -14,7 +14,11 @@ type Props = {
 
 export function HeaderClient({ bookingHref, links }: Props) {
   const pathname = usePathname();
-  const [headerOpacity, setHeaderOpacity] = useState(1);
+  // On the homepage the header should start hidden (hero is the focus) and
+  // fade in as the user scrolls past it. Other pages show the header from the
+  // first paint.
+  const isHomepage = pathname === "/";
+  const [headerOpacity, setHeaderOpacity] = useState(isHomepage ? 0 : 1);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const isExternalBooking = bookingHref.startsWith("http");

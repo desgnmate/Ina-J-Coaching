@@ -1,7 +1,12 @@
 "use client";
 
+import {
+  ChatCircleDotsIcon,
+  FoldersIcon,
+  MagnifyingGlassIcon,
+  VideoCameraIcon,
+} from "@phosphor-icons/react";
 import Image from "next/image";
-import { useState } from "react";
 import { Testimonials } from "@/components/home/Testimonials";
 import { Accordion } from "@/components/shared/Accordion";
 import { Button } from "@/components/shared/Button";
@@ -11,13 +16,14 @@ import { StickyCta } from "@/components/shared/StickyCta";
 import { site } from "@/lib/content";
 import { images } from "@/lib/images";
 
-const deliverableTabs = [
+const deliverablePillars = [
   {
     id: "calls",
-    label: "Weekly Group Calls",
     eyebrow: "Live Interactive Strategy",
     title: "Deep, focused group problem solving",
     body: "Join recurring weekly coaching calls where we audit copy, troubleshoot booking bottlenecks, and strategize visibility campaigns in real time. Every call is recorded for your archives.",
+    icon: VideoCameraIcon,
+    accent: "terracotta" as const,
     bullets: [
       "Direct 1-to-1 hot-seat time with Ina",
       "Peer learning from fellow high-end studios",
@@ -26,10 +32,11 @@ const deliverableTabs = [
   },
   {
     id: "slack",
-    label: "Asynchronous Slack Feedback",
     eyebrow: "Continuous Support Container",
     title: "Never get stuck implementing alone",
     body: "Get daily async advice in our dedicated Slack channel. Submit draft copy, pricing spreadsheets, or email campaigns for review before pushing them live to your list.",
+    icon: ChatCircleDotsIcon,
+    accent: "gold" as const,
     bullets: [
       "24-48 hr direct feedback turnaround",
       "A private space for copy, layout, and client email reviews",
@@ -38,10 +45,11 @@ const deliverableTabs = [
   },
   {
     id: "audits",
-    label: "Website & Pricing Audits",
     eyebrow: "Strategic Screencast Reviews",
     title: "Granular audits of your online assets",
     body: "Ina records high-density screencast reviews of your website, pricing sheets, and enquiry forms to expose leak points in your conversions.",
+    icon: MagnifyingGlassIcon,
+    accent: "terracotta" as const,
     bullets: [
       "UX, SEO, and copywriting assessment",
       "Pricing card structuring and tier alignment",
@@ -50,17 +58,18 @@ const deliverableTabs = [
   },
   {
     id: "collective",
-    label: "The Collective Portal",
     eyebrow: "On-Demand Blueprint Vault",
     title: "Templates, tools, and visual guides",
     body: "Gain access to exclusive resources, including pricing calculators, response templates, and SEO setups that Ina has used to maintain a 6-figure photography business.",
+    icon: FoldersIcon,
+    accent: "gold" as const,
     bullets: [
       "Ready-to-use email reply scripts",
       "Interactive photography pricing sheets",
-      "Marquet/visibility blueprint frameworks",
+      "Market/visibility blueprint frameworks",
     ],
   },
-];
+] as const;
 
 const faqs = [
   {
@@ -91,10 +100,6 @@ const faqs = [
 ];
 
 export default function MastermindPage() {
-  const [activeTab, setActiveTab] = useState("calls");
-  const activeData =
-    deliverableTabs.find((t) => t.id === activeTab) || deliverableTabs[0];
-
   const faqAccordionItems = faqs.map((faq) => ({
     title: faq.title,
     content: <p>{faq.content}</p>,
@@ -188,7 +193,7 @@ export default function MastermindPage() {
         </div>
       </section>
 
-      {/* ── 2 · Interactive Pillars (Tabs) ── */}
+      {/* ── 2 · Inside the Mastermind — Pillars Grid ── */}
       <section className="bg-cream-deep bg-dots section has-pattern py-20 md:py-28">
         <div className="container-editorial">
           <SectionHeading
@@ -201,72 +206,100 @@ export default function MastermindPage() {
                 </span>
               </>
             }
-            body="The Mastermind is built for implementation. Choose a tab below to explore the four active support pillars of the container."
+            body="The Mastermind is built for implementation. Four active support pillars run in parallel — each one addressing a different friction point in your client journey."
           />
 
-          {/* Tabs header */}
-          <div className="mt-10 flex flex-wrap gap-2.5 justify-center">
-            {deliverableTabs.map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id)}
-                className={`rounded-full px-5 py-2.5 text-sm font-medium tracking-[0.02em] transition-all cursor-pointer ${
-                  activeTab === tab.id
-                    ? "bg-ink text-cream shadow-sm"
-                    : "bg-cream border border-line text-ink-soft hover:bg-ink hover:text-cream"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
+          {/* Pillar cards grid */}
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:gap-7">
+            {deliverablePillars.map((pillar, idx) => {
+              const Icon = pillar.icon;
+              const accentClasses =
+                pillar.accent === "terracotta"
+                  ? "text-terracotta bg-terracotta/10 ring-terracotta/20"
+                  : "text-gold bg-gold/15 ring-gold/30";
+              const hairline =
+                pillar.accent === "terracotta"
+                  ? "from-transparent via-terracotta/50 to-transparent"
+                  : "from-transparent via-gold/60 to-transparent";
+              return (
+                <Reveal
+                  key={pillar.id}
+                  from="up"
+                  delay={idx * 0.08}
+                  className="h-full"
+                >
+                  <article className="group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-line/70 bg-cream p-8 shadow-[0_8px_24px_-20px_rgba(68,53,61,0.08)] transition-all duration-500 ease-out hover:-translate-y-1 hover:border-terracotta/30 hover:shadow-[0_24px_48px_-24px_rgba(68,53,61,0.18)] md:p-10">
+                    {/* Top accent hairline */}
+                    <div
+                      aria-hidden
+                      className={`pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r ${hairline}`}
+                    />
 
-          {/* Active Tab Panel */}
-          <div className="mt-8">
-            <div className="grid gap-8 rounded-[2.5rem] border border-line bg-cream p-8 shadow-[0_15px_40px_-20px_rgba(68,53,61,0.14)] md:p-12 lg:grid-cols-12 lg:items-center">
-              {/* Panel Info */}
-              <div className="lg:col-span-7">
-                <span className="eyebrow text-gold text-xs">
-                  {activeData.eyebrow}
-                </span>
-                <h3 className="font-display text-2xl md:text-3xl text-ink mt-3">
-                  {activeData.title}
-                </h3>
-                <p className="mt-4 text-sm md:text-base text-ink-soft leading-relaxed">
-                  {activeData.body}
-                </p>
-              </div>
-
-              {/* Panel Checklist */}
-              <div className="lg:col-span-5 bg-cream-warm/30 rounded-2xl p-6 md:p-8 border border-line/60">
-                <p className="text-[0.65rem] font-bold tracking-[0.2em] text-ink-muted uppercase mb-4">
-                  What you get
-                </p>
-                <ul className="space-y-3">
-                  {activeData.bullets.map((bullet) => (
-                    <li
-                      key={bullet}
-                      className="flex items-start gap-3 text-sm text-ink-soft"
-                    >
-                      <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-terracotta/10 text-terracotta">
-                        <svg
-                          className="h-2.5 w-2.5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                        >
-                          <title>Included item checkmark</title>
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
+                    {/* Icon block */}
+                    <div className="flex items-start justify-between">
+                      <span
+                        className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl ring-1 ${accentClasses} transition-transform duration-500 ease-out group-hover:scale-105`}
+                      >
+                        <Icon size={28} weight="duotone" aria-hidden />
                       </span>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+                      <span className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-ink-muted">
+                        0{idx + 1}
+                      </span>
+                    </div>
+
+                    {/* Eyebrow + Title */}
+                    <span className="eyebrow mt-6 text-[0.65rem]">
+                      {pillar.eyebrow}
+                    </span>
+                    <h3 className="mt-2 font-display text-xl text-ink md:text-2xl">
+                      {pillar.title}
+                    </h3>
+
+                    {/* Body */}
+                    <p className="mt-3 text-sm leading-relaxed text-ink-soft md:text-[0.95rem]">
+                      {pillar.body}
+                    </p>
+
+                    {/* Divider */}
+                    <div className="my-6 h-px w-full bg-line/60" />
+
+                    {/* What you get */}
+                    <p className="text-[0.6rem] font-bold uppercase tracking-[0.22em] text-ink-muted">
+                      What you get
+                    </p>
+                    <ul className="mt-3 space-y-2.5">
+                      {pillar.bullets.map((bullet) => (
+                        <li
+                          key={bullet}
+                          className="flex items-start gap-2.5 text-[0.85rem] leading-relaxed text-ink-soft"
+                        >
+                          <span
+                            className={`mt-1 flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full ${
+                              pillar.accent === "terracotta"
+                                ? "bg-terracotta/12 text-terracotta"
+                                : "bg-gold/20 text-gold"
+                            }`}
+                            aria-hidden
+                          >
+                            <svg
+                              className="h-2 w-2"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth="3.5"
+                              role="presentation"
+                            >
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                          </span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>

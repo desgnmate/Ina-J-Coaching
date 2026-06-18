@@ -77,34 +77,68 @@ export function Pillars() {
   const [activeStep, setActiveStep] = useState(0);
   const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
   const containerRef = useRef<HTMLDivElement>(null);
+  // Tracks the last committed active step without triggering re-renders.
+  // Used by the scroll handler to skip no-op setState calls.
+  const activeStepRef = useRef(0);
 
-  // Monitor viewport center to highlight active card on scroll
+  // Active-card detection: on every scroll, find the card whose vertical
+  // center is closest to the viewport center and mark it active.
+  //
+  // Why not IntersectionObserver: IO only fires when an element's
+  // intersection state *changes*. During a fast scroll a card can be
+  // skipped (its state never meaningfully intersects the trigger zone,
+  // or two state changes arrive in a single batch and the intermediate
+  // card is never seen). Tracking the closest-to-center card from a
+  // scroll listener is deterministic — every scroll tick re-evaluates
+  // all three cards against the current viewport, so going 3 → 1 has to
+  // pass through 2. requestAnimationFrame coalesces the work to one
+  // update per frame.
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: "-35% 0px -45% 0px", // Isolates vertical middle area of viewport
-      threshold: 0.15,
-    };
+    let raf: number | null = null;
 
-    const handleIntersect = (entries: IntersectionObserverEntry[]) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          const index = cardRefs.current.indexOf(
-            entry.target as HTMLDivElement,
-          );
-          if (index !== -1) {
-            setActiveStep(index);
-          }
+    const recompute = () => {
+      raf = null;
+      if (typeof window === "undefined") return;
+
+      const viewportCenter = window.innerHeight / 2;
+      let closestIndex = 0;
+      let closestDistance = Number.POSITIVE_INFINITY;
+
+      for (let i = 0; i < cardRefs.current.length; i++) {
+        const card = cardRefs.current[i];
+        if (!card) continue;
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(cardCenter - viewportCenter);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = i;
         }
+      }
+
+      if (closestIndex !== activeStepRef.current) {
+        activeStepRef.current = closestIndex;
+        setActiveStep(closestIndex);
       }
     };
 
-    const observer = new IntersectionObserver(handleIntersect, observerOptions);
-    for (const card of cardRefs.current) {
-      if (card) observer.observe(card);
-    }
+    const schedule = () => {
+      if (raf !== null) return;
+      raf = window.requestAnimationFrame(recompute);
+    };
 
-    return () => observer.disconnect();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    // Compute once on mount so the initial render is in sync with the
+    // current scroll position (covers the case where the page is loaded
+    // already scrolled past the section).
+    recompute();
+
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (raf !== null) window.cancelAnimationFrame(raf);
+    };
   }, []);
 
   // Calculate heights of active dots on mount and resize
@@ -194,10 +228,10 @@ export function Pillars() {
 
                   {/* Card Container - No horizontal or vertical staggered offsets */}
                   <div
-                    className={`group relative rounded-[2rem] border p-8 select-none transition-[border-color,background-color,box-shadow] duration-300 md:p-10 overflow-hidden ${
+                    className={`group relative rounded-[2rem] border p-8 select-none transition-[border-color,background-color,box-shadow,opacity,transform] duration-500 ease-out md:p-10 overflow-hidden ${
                       isActive
-                        ? "border-terracotta/28 bg-cream shadow-[0_16px_32px_-22px_rgba(68,53,61,0.14)]"
-                        : "border-line/75 bg-cream shadow-[0_8px_18px_-22px_rgba(68,53,61,0.05)]"
+                        ? "border-terracotta/40 bg-cream opacity-100 scale-100 shadow-[0_20px_40px_-20px_rgba(212,104,88,0.18)]"
+                        : "border-line/60 bg-cream/70 opacity-55 scale-[0.97] shadow-[0_4px_12px_-18px_rgba(68,53,61,0.04)]"
                     }`}
                     style={{ backdropFilter: "blur(8px)" }}
                   >

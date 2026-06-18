@@ -44,6 +44,7 @@ next-env.d.ts
 .antigravitycli/
 .commandcode/
 .hermes/
+.playwright-mcp/
 plan.md
 dev-server.log
 backups/
