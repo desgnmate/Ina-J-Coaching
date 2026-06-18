@@ -108,6 +108,13 @@ export function Hero() {
   const [isInView, setIsInView] = useState(true);
   const isInViewRef = useRef(true);
   isInViewRef.current = isInView;
+  // Mirror of `contentOpacity` motion value, synced via useMotionValueEvent.
+  // Used to apply scroll-linked opacity to the content wrapper on desktop
+  // (a plain <div>, not a <motion.div> — see comment on the content wrapper).
+  const [contentOpacityValue, setContentOpacityValue] = useState(0);
+  // Mirror of `collageOpacity` and `collageY` motion values, same reason.
+  const [collageOpacityValue, setCollageOpacityValue] = useState(0);
+  const [collageYValue, setCollageYValue] = useState(40);
   const [audioMode, setAudioMode] = useState<
     "auto" | "muted" | "forced-unmuted"
   >("auto");
@@ -454,6 +461,9 @@ export function Hero() {
     rightPawOpacity.set(interpolate(p, 0, 0.45, 0, 0.34));
     contentOpacity.set(interpolate(p, 0.45, 0.75, 0, 1));
     collageOpacity.set(interpolate(p, 0.55, 0.85, 0, 1));
+    setContentOpacityValue(interpolate(p, 0.45, 0.75, 0, 1));
+    setCollageOpacityValue(interpolate(p, 0.55, 0.85, 0, 1));
+    setCollageYValue(interpolate(p, 0.55, 0.85, 40, 0));
     collageY.set(interpolate(p, 0.55, 0.85, 40, 0));
 
     const volumeFactor = clamp(interpolate(p, 0, 0.45, 1, 0), 0, 1);
@@ -707,10 +717,15 @@ export function Hero() {
           />
         )}
 
-        {/* Vertically centered content wrapper */}
+        {/* Vertically centered content wrapper. Uses a plain <div> on both
+            breakpoints — the framer-motion <motion.div> + `style={motionValue}`
+            pattern was leaving `opacity:0` inline on mobile even when the
+            style prop was `undefined` (framer-motion keeps tracking the value).
+            The desktop scroll-linked opacity is driven by [contentOpacity] state
+            synced from the motion value via useMotionValueEvent. */}
         <div className="flex-grow flex items-center relative z-10 w-full py-4 md:py-6">
-          <motion.div
-            style={!isMobile ? { opacity: contentOpacity } : undefined}
+          <div
+            style={!isMobile ? { opacity: contentOpacityValue } : undefined}
             className="container-editorial w-full"
           >
             <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-12 xl:gap-16">
@@ -853,7 +868,7 @@ export function Hero() {
                 )}
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Morphing Video Player for Desktop */}
@@ -1036,10 +1051,17 @@ export function Hero() {
           </motion.div>
         )}
 
-        {/* Full-width image collage inside the hero section, below the main content */}
-        <motion.div
+        {/* Full-width image collage inside the hero section, below the main content.
+            Same pattern as the content wrapper above — plain <div> with state-driven
+            opacity/transform to avoid the motion.div inline-opacity bug on mobile. */}
+        <div
           style={
-            !isMobile ? { opacity: collageOpacity, y: collageY } : undefined
+            !isMobile
+              ? {
+                  opacity: collageOpacityValue,
+                  transform: `translateY(${collageYValue}px)`,
+                }
+              : undefined
           }
           className="w-full relative z-10 overflow-hidden pb-6 pt-4"
         >
@@ -1091,7 +1113,7 @@ export function Hero() {
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Bottom fade gradient for smooth transition into next section */}
