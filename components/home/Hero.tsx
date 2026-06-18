@@ -501,9 +501,9 @@ export function Hero() {
         setBrowserMutedFallback(true); // Playing muted — user can enable sound via prompt or button.
       } catch (err) {
         // play() rejects if the browser hasn't buffered enough data yet.
-        // The 'canplay' listener below will retry once data is available.
+        // The readiness listeners below will retry once data is available.
         console.warn(
-          "[Hero video] autoplay play() rejected, waiting for canplay:",
+          "[Hero video] autoplay play() rejected, waiting for ready:",
           err,
         );
         setAutoplayBlocked(true);
@@ -511,18 +511,27 @@ export function Hero() {
       }
     };
 
-    // If the video wasn't ready when we called play() above, try again as soon as it can.
-    const onCanPlay = () => {
+    // Retry play() on every "ready" event the browser fires. On a cold cache
+    // the first play() almost always rejects (the video hasn't buffered
+    // enough yet); the video only starts once one of these fires AND
+    // isInView is true. Listening to all three covers the timing
+    // differences between browsers and between cache-cold vs warm loads.
+    const tryPlayIfReady = () => {
       if (video.paused && isInViewRef.current) {
-        video
-          .play()
-          .then(() => {
+        video.play().then(
+          () => {
             setAutoplayBlocked(false);
             setBrowserMutedFallback(true);
-          })
-          .catch(() => {});
+          },
+          () => {
+            // Still not ready — will retry on the next ready event
+          },
+        );
       }
     };
+    const onCanPlay = tryPlayIfReady;
+    const onLoadedData = tryPlayIfReady;
+    const onCanPlayThrough = tryPlayIfReady;
 
     // Surface load errors so we can debug codec/network/404 issues.
     const onError = () => {
@@ -537,6 +546,8 @@ export function Hero() {
     video.addEventListener("timeupdate", syncProgress);
     video.addEventListener("loadedmetadata", syncProgress);
     video.addEventListener("canplay", onCanPlay);
+    video.addEventListener("loadeddata", onLoadedData);
+    video.addEventListener("canplaythrough", onCanPlayThrough);
     video.addEventListener("error", onError);
     void tryStart();
 
@@ -544,6 +555,8 @@ export function Hero() {
       video.removeEventListener("timeupdate", syncProgress);
       video.removeEventListener("loadedmetadata", syncProgress);
       video.removeEventListener("canplay", onCanPlay);
+      video.removeEventListener("loadeddata", onLoadedData);
+      video.removeEventListener("canplaythrough", onCanPlayThrough);
       video.removeEventListener("error", onError);
     };
     // audioMode intentionally excluded — audio changes are handled by applyAudioState below.
@@ -733,13 +746,14 @@ export function Hero() {
                       muted
                       loop
                       playsInline
-                      preload="metadata"
+                      preload="auto"
                       poster={HERO_VIDEO_POSTER}
                       disablePictureInPicture
                       controlsList="nodownload nofullscreen noremoteplayback"
                       className="cinematic-video absolute inset-0 h-full w-full object-cover scale-[1.15]"
-                      src={HERO_VIDEO_SRC}
-                    />
+                    >
+                      <source src={HERO_VIDEO_SRC} type="video/mp4" />
+                    </video>
                     <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.14)_0%,rgba(0,0,0,0.22)_58%,rgba(0,0,0,0.34)_100%)]" />
 
                     {showSoundPrompt && !hasInteracted && (
@@ -862,13 +876,14 @@ export function Hero() {
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                preload="auto"
                 poster={HERO_VIDEO_POSTER}
                 disablePictureInPicture
                 controlsList="nodownload nofullscreen noremoteplayback"
                 className="cinematic-video absolute inset-0 h-full w-full object-cover scale-[1.15]"
-                src={HERO_VIDEO_SRC}
-              />
+              >
+                <source src={HERO_VIDEO_SRC} type="video/mp4" />
+              </video>
               <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.14)_0%,rgba(0,0,0,0.22)_58%,rgba(0,0,0,0.34)_100%)]" />
 
               {/* "More about Ina" hover button — only visible on the minimized video preview. */}
