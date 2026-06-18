@@ -118,11 +118,6 @@ export function Hero() {
   const [browserMutedFallback, setBrowserMutedFallback] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [videoMinimized, setVideoMinimized] = useState(false);
-  // Tracks whether the hero video is actually playing. Drives the poster
-  // overlay opacity so the poster stays visible until the first frame
-  // renders, then fades out seamlessly — making the video look like it's
-  // resuming from pause.
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   // Browser autoplay policy requires a user gesture before unmuted playback.
   // We auto-play muted, then show a one-time prompt asking the user to enable sound.
   // Once dismissed (or unmuted), we never show it again for this page-load.
@@ -744,20 +739,6 @@ export function Hero() {
                       controlsList="nodownload nofullscreen noremoteplayback"
                       className="cinematic-video absolute inset-0 h-full w-full object-cover scale-[1.15]"
                       src={HERO_VIDEO_SRC}
-                      onPlaying={() => setIsVideoPlaying(true)}
-                      onPause={() => setIsVideoPlaying(false)}
-                      onEnded={() => setIsVideoPlaying(false)}
-                    />
-                    <Image
-                      src={HERO_VIDEO_POSTER}
-                      alt=""
-                      aria-hidden
-                      fill
-                      priority
-                      sizes="(min-width: 768px) 50vw, 100vw"
-                      className={`object-cover scale-[1.15] pointer-events-none select-none transition-opacity duration-700 ease-out ${
-                        isVideoPlaying ? "opacity-0" : "opacity-100"
-                      }`}
                     />
                     <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.14)_0%,rgba(0,0,0,0.22)_58%,rgba(0,0,0,0.34)_100%)]" />
 
@@ -887,20 +868,6 @@ export function Hero() {
                 controlsList="nodownload nofullscreen noremoteplayback"
                 className="cinematic-video absolute inset-0 h-full w-full object-cover scale-[1.15]"
                 src={HERO_VIDEO_SRC}
-                onPlaying={() => setIsVideoPlaying(true)}
-                onPause={() => setIsVideoPlaying(false)}
-                onEnded={() => setIsVideoPlaying(false)}
-              />
-              <Image
-                src={HERO_VIDEO_POSTER}
-                alt=""
-                aria-hidden
-                fill
-                priority
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className={`object-cover scale-[1.15] pointer-events-none select-none transition-opacity duration-700 ease-out ${
-                  isVideoPlaying ? "opacity-0" : "opacity-100"
-                }`}
               />
               <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.14)_0%,rgba(0,0,0,0.22)_58%,rgba(0,0,0,0.34)_100%)]" />
 
