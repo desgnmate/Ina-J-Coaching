@@ -7,7 +7,7 @@ import { images } from "@/lib/images";
 
 export function AboutHero() {
   return (
-    <section className="bg-grid bg-noise-cream relative h-auto overflow-hidden py-10 md:py-12 lg:min-h-screen lg:max-h-[950px] lg:py-[clamp(2rem,4vh,3.25rem)]">
+    <section className="bg-grid bg-noise-cream relative h-auto overflow-hidden pt-20 pb-10 md:pt-12 md:pb-12 lg:min-h-screen lg:max-h-[950px] lg:py-[clamp(2rem,4vh,3.25rem)]">
       <div className="container-editorial relative z-10 h-full">
         <div className="flex min-h-0 flex-col justify-center lg:min-h-[calc(100svh-5rem)] lg:justify-center">
           <div className="relative hidden items-center justify-center lg:flex lg:min-h-[60vh] xl:min-h-[66vh]">
