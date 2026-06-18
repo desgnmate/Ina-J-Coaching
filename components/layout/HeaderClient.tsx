@@ -14,9 +14,11 @@ type Props = {
 
 export function HeaderClient({ bookingHref, links }: Props) {
   const pathname = usePathname();
-  // On the homepage the header should start hidden (hero is the focus) and
-  // fade in as the user scrolls past it. Other pages show the header from the
-  // first paint.
+  // On the homepage: desktop starts with the header hidden (hero is the
+  // focus) and fades in as the user scrolls past it. Mobile always shows
+  // the header because the hero is short and there's no room to fade in
+  // from "nothing" without making the header feel missing. Other pages
+  // always show the header from first paint.
   const isHomepage = pathname === "/";
   const [headerOpacity, setHeaderOpacity] = useState(isHomepage ? 0 : 1);
   const [scrolled, setScrolled] = useState(false);
@@ -42,6 +44,10 @@ export function HeaderClient({ bookingHref, links }: Props) {
     // On homepage, header opacity is controlled by hero-content-opacity event
     if (pathname === "/") {
       const onHeroOpacity = (e: Event) => {
+        // On mobile, the header is always visible (see the viewport effect
+        // below) — the hero is too short for the scroll-driven fade to be
+        // useful, and a missing header breaks mobile navigation.
+        if (window.innerWidth < 768) return;
         const detail = (e as CustomEvent).detail;
         setHeaderOpacity(detail.opacity);
         setScrolled(detail.opacity > 0.5);
@@ -65,6 +71,23 @@ export function HeaderClient({ bookingHref, links }: Props) {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  // On the homepage on mobile, always show the header — the hero is too
+  // short for the scroll-driven fade to make sense, and a missing header
+  // on mobile makes navigation feel broken. Desktop keeps the original
+  // scroll-driven fade behavior.
+  useEffect(() => {
+    if (!isHomepage) return;
+    const MOBILE_BREAKPOINT = 768;
+    const syncHeaderToViewport = () => {
+      if (window.innerWidth < MOBILE_BREAKPOINT) {
+        setHeaderOpacity(1);
+      }
+    };
+    syncHeaderToViewport();
+    window.addEventListener("resize", syncHeaderToViewport);
+    return () => window.removeEventListener("resize", syncHeaderToViewport);
+  }, [isHomepage]);
 
   return (
     <header

@@ -662,7 +662,7 @@ export function Hero() {
 
       <div
         ref={stickyWrapperRef}
-        className="hero-sticky-container sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between relative pt-20 md:pt-24 lg:pt-28 pb-4 md:pb-6"
+        className="hero-sticky-container sticky top-0 min-h-screen md:h-screen w-full md:overflow-hidden flex flex-col md:justify-between relative pt-20 md:pt-24 lg:pt-28 pb-4 md:pb-6"
       >
         {/* Top-right glow that stays pinned inside the sticky wrapper so it doesn't
               scroll away with the page. */}
