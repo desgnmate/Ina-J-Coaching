@@ -35,6 +35,15 @@ export function HeaderClient({ bookingHref, links }: Props) {
     const onScroll = () => {
       const scrollY = window.scrollY;
 
+      // On the homepage on mobile, the hero-content-opacity event is
+      // ignored (the header is always visible), so the scrolled state
+      // has to be driven by the actual scroll position so the cream
+      // background + dark logo kick in as the user scrolls past the hero.
+      if (pathname === "/" && window.innerWidth < 768) {
+        setScrolled(scrollY > 50);
+        return;
+      }
+
       if (pathname !== "/") {
         setScrolled(scrollY > 50);
         setHeaderOpacity(1);
